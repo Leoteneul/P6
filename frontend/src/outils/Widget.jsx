@@ -12,7 +12,7 @@ const LinkConteneur = styled.div`
   position: relative;
 `
 
-const Link = styled.div`
+const StyledLink = styled.div`
   display: inline-flex;
   justify-content: flex-end;
   max-width: 80px;
@@ -21,11 +21,12 @@ const Link = styled.div`
   border-radius: 0 20px 20px 0;
   overflow: hidden;
   background-color: ${colors.primary};
+  text-decoration: none;
   box-shadow: ${shading};
   cursor: pointer;
 
   &:hover {
-    animation: widgetDisplay 1.5s forwards;   
+    animation: widgetDisplay 1s forwards;   
   }
 `
 
@@ -61,29 +62,31 @@ const Time = styled.h2`
   background-color: white;
 `
 
-function Widget() {
+function Widget({setDisplayPanel}) {
+
   return (
     
     <LinkConteneur>
     <GlobalStyle />
-      <Link>
+      <StyledLink onClick={() => setDisplayPanel(true)}>
+      
         <WidgetTitle>Profil</WidgetTitle>
         <StyledIcon>
           <FaUser />
         </StyledIcon>
-      </Link>
-      <Link>
+      </StyledLink>
+      <StyledLink>
         <WidgetTitle>Email</WidgetTitle>
         <StyledIcon>
           <FaAt />
         </StyledIcon>
-      </Link>
-      <Link>
-        <WidgetTitle $isFullLink>Contact</WidgetTitle>
+      </StyledLink>
+      <StyledLink>
+        <WidgetTitle>Contact</WidgetTitle>
         <StyledIcon>
           <FaPaperPlane />
         </StyledIcon>
-      </Link>
+      </StyledLink>
       <Time>11:26</Time>
     </LinkConteneur>
   )

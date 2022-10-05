@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import OutilsProfil from '../outils/OutilsProfil'
 import Widget from '../outils/Widget'
@@ -12,14 +11,17 @@ const LeftFixConteneur = styled.div`
     left: 0;
   `
 
-function LeftFix() {
+function LeftFix({isDisplayPanel, setDisplayPanel}) {
+  
   
 
+  console.log(isDisplayPanel)
+  
+  
   return (
     <LeftFixConteneur>
       <OutilsProfil />
-      <Widget />
-      <Link to="/profil">Profil</Link>
+      <Widget setDisplayPanel={setDisplayPanel}/>
     </LeftFixConteneur>
   )
 }

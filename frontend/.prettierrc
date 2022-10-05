@@ -3,5 +3,7 @@
 {
     "semi": false,
     "singleQuote": true,
-    "tabWidth": 2
+    "tabWidth": 2,
+    "useTabs": true,
+    "rangeStart": 2
 }

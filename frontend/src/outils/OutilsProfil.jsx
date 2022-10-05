@@ -3,11 +3,12 @@ import ProfilPicture from '../assets/ProfilPicture.jpg'
 import { colors } from '../style/utils'
 import { shading } from '../style/utils'
 
+
 const ProfilContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 30%;
+  height: 280px;
   width: 100%;
 `
 
@@ -33,6 +34,7 @@ const PictureContainer = styled.div`
   border-radius: 0 0 20px 20px;
   background-color: white;
   box-shadow: rgba(196, 196, 201, 0.2) 0px 7px 29px 0px;
+  z-index: 2;
 `
 const PictureWrapper = styled.div`
   background-color: aliceblue;
@@ -44,6 +46,7 @@ const PictureWrapper = styled.div`
   overflow: hidden;
   border-radius: 60px;
   border: 4px solid ${colors.enLigne};
+  
 `
 const Picture = styled.img`
   max-height: 200px;
@@ -57,6 +60,15 @@ const Status = styled.p`
   align-self: flex-start;
 `
 
+const Job = styled.h2`
+  padding: 10px 40px 10px 40px;
+  border-radius: 0 0 15px 15px;
+  background-color: white;
+  box-shadow: ${shading};
+  z-index: 0;
+
+` 
+
 function OutilsProfil() {
   return (
     <ProfilContainer>
@@ -67,6 +79,7 @@ function OutilsProfil() {
         </PictureWrapper>
         <Status>En Ligne</Status>
       </PictureContainer>
+      <Job>Dev Web</Job>
     </ProfilContainer>
   )
 }

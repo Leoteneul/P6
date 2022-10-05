@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // import App from './App';
 import Home from './pages/Home/Home'
-import Profil from './pages/Profil'
+import User from './pages/User'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -13,7 +13,8 @@ root.render(
       
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="profil" element={<Profil />} />
+        <Route path="user" element={<User />} />
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
