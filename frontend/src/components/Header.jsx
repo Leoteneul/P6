@@ -5,11 +5,21 @@ const LogoConteneur = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 40%;
   height: 200px;
   border-radius: 0 0 50px 50px;
   background-color: white;
   overflow: hidden;
+
+  @media (max-width: 1024px) {
+    
+    width: 80%;
+    }
+  
+      @media (max-width: 450px){
+      
+      width: 100%;
+    }
 `
 
 const Logo = styled.img`

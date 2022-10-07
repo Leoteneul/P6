@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // import App from './App';
-import Home from './pages/Home/Home'
-import User from './pages/User'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import GlobalStyle from './style/GlobalStyle'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+    
     <BrowserRouter>
       
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="user" element={<User />} />
+        
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         
       </Routes>
     </BrowserRouter>
