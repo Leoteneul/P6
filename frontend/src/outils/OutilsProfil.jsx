@@ -69,17 +69,17 @@ const Job = styled.h2`
 
 ` 
 
-function OutilsProfil() {
+function OutilsProfil({ homeData }) {
   return (
     <ProfilContainer>
-      <Name>Teneul Léo</Name>
+      <Name>{homeData.name}</Name>
       <PictureContainer>
         <PictureWrapper>
           <Picture src={ProfilPicture} alt="photo de profil" />
         </PictureWrapper>
         <Status>En Ligne</Status>
       </PictureContainer>
-      <Job>Dev Web</Job>
+      <Job>{homeData.job}</Job>
     </ProfilContainer>
   )
 }

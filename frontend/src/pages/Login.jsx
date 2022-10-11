@@ -6,14 +6,14 @@ import GlobalStyle from '../style/GlobalStyle'
 
 
 
-function Login() {
+function Login({ setUserId }){
 
     
 	return (
             <LoginConteneur>
                 <GlobalStyle></GlobalStyle>
                 <Header />
-                <LoginPanel></LoginPanel>
+                <LoginPanel setUserId={setUserId}></LoginPanel>
 			
             </LoginConteneur>
 		

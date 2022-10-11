@@ -3,6 +3,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express();
 const routeUser = require('./routes/user')
+const cors = require('cors')
+
+
 mongoose.connect(String(process.env.MONGOOSE_URL),
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -17,8 +20,10 @@ app.use((req, res, next) => {
     next();
   });
 
-  app.use(express.json());
-  
+
+app.use(cors())
+
+app.use(express.json());
 app.use('/api/users', routeUser)
 
 

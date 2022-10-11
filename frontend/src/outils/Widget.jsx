@@ -58,12 +58,16 @@ const Time = styled.h2`
   margin-top: 40px;
   border-radius: 0 20px 20px 0;
   height: 15%;
-  width: 30%;
+  min-width: 120px;
   background-color: white;
 `
 
 function Widget({setDisplayPanel}) {
+    const now = new Date()
+    const heure = now.getHours()
+    const minute = now.getMinutes()
 
+    console.log(heure, minute)
   return (
     
     <LinkConteneur>
@@ -87,7 +91,7 @@ function Widget({setDisplayPanel}) {
           <FaPaperPlane />
         </StyledIcon>
       </StyledLink>
-      <Time>11:26</Time>
+      <Time>{heure}:{minute}</Time>
     </LinkConteneur>
   )
 }

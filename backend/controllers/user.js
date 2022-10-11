@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-
+const jwt = require('jsonwebtoken')
 
 
 exports.signup = (req, res, next) => {
@@ -9,7 +9,7 @@ exports.signup = (req, res, next) => {
     
     if(!strongPassword.test(req.body.password)){
 
-        return res.status(400).json({message: 'mdp trop simple'})
+        return res.status(400).json({message: 'mdp tropeee simple'})
         
     }else{
         
@@ -17,7 +17,9 @@ exports.signup = (req, res, next) => {
         .then(hash => {
         const user = new User({
             email: req.body.email,
-            password: hash
+            password: hash,
+            job: '.' ,
+            name: '.'
         });
         user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur Créé !'}))
@@ -26,4 +28,42 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
     }    
 };
+
+exports.login = (req, res, next) => {
+
+    User.findOne({ email: req.body.email})
+        .then(user => {
+            if(user === null){
+                res.status(401).json({ message: 'La paire email/mot eeeeeeede passe ne corresponds pas'})
+            }else {
+                bcrypt.compare(req.body.password, user.password)
+                    .then(valid => {
+                        if(!valid){
+                            res.status(401).json({ message: 'La paire email/mot de passe ne corresponds pas'})
+                        }else {
+                            res.status(200).json({
+                                userId: user._id,
+                                token: jwt.sign(
+                                    {userId: user._id},
+                                    'salt',
+                                    { expiresIn: '24h' }
+                                )
+                            })
+
+
+                        }
+                    })
+                    .catch(error => res.status(500).json({ error }));
+            }
+        })
+        .catch(error => res.status(500).json({ error }));
+};
+
+
+exports.home = (req, res, next) => { 
+
     
+   User.findOne({ _id: req.auth.userId })
+   .then((user) => res.status(200).json(user))
+   .catch(error => res.status(404).json({ error }))
+};

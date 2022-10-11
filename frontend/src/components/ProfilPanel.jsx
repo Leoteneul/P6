@@ -4,16 +4,16 @@ import { colors, shading } from '../style/utils'
 import { FaTimes } from 'react-icons/fa'
 import Footer from './Footer'
 
-function ProfilPanel({setDisplayPanel}) {
+function ProfilPanel({setDisplayPanel, homeData}) {
 	return (
 		<BlurZone>
 			<PanelConteneur>
-				<Title>Profil</Title>
+				<Title>Mon Profil</Title>
 				<ProfilWrapper>
-					<OutilsProfil />
+					<OutilsProfil homeData={homeData}/>
 					<MailWrapper>
 						<MailTitle>Mail</MailTitle>
-						<MailInput type="text" />
+						<MailInput placeholder={homeData.email} type="text"/>
 						<MailButton type="submit">Submit</MailButton>
 					</MailWrapper>
 				</ProfilWrapper>
@@ -104,6 +104,7 @@ const MailWrapper = styled.div`
 `
 const MailTitle = styled.h3`
 	margin-right: 20px;
+
 `
 
 const MailInput = styled.input`
@@ -116,6 +117,10 @@ const MailInput = styled.input`
 	font-weight: bold;
 	color: ${colors.primary};
 
+	&::placeholder{
+		color: ${colors.primary};
+	}
+
 	&:focus {
 		outline: none;
 	}
@@ -124,7 +129,7 @@ const MailButton = styled.button`
 	background-color: ${colors.primary};
 	font-size: 18px;
 	font-weight: bold;
-
+	cursor: pointer;
 	border: 2px solid white;
 	border-left: none;
 	border-radius: 0 15px 15px 0;
