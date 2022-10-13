@@ -39,6 +39,9 @@ const WidgetTitle = styled.h2`
   justify-content: center;
   align-items: center;
   color: ${colors.primary};
+  ${(props) =>
+        props.$isEmail &&
+        `font-size: 20px;`}
 `
 
 const StyledIcon = styled.div`
@@ -62,7 +65,7 @@ const Time = styled.h2`
   background-color: white;
 `
 
-function Widget({setDisplayPanel}) {
+function Widget({setDisplayPanel, homeData}) {
     const now = new Date()
     const heure = now.getHours()
     const minute = now.getMinutes()
@@ -80,7 +83,7 @@ function Widget({setDisplayPanel}) {
         </StyledIcon>
       </StyledLink>
       <StyledLink>
-        <WidgetTitle>Email</WidgetTitle>
+        <WidgetTitle $isEmail >{homeData.email}</WidgetTitle>
         <StyledIcon>
           <FaAt />
         </StyledIcon>

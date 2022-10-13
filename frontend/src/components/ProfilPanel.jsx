@@ -3,17 +3,31 @@ import OutilsProfil from '../outils/OutilsProfil'
 import { colors, shading } from '../style/utils'
 import { FaTimes } from 'react-icons/fa'
 import Footer from './Footer'
+import { useState } from 'react'
+import submitMail from '../hooks/HookSubmitMail'
 
-function ProfilPanel({setDisplayPanel, homeData}) {
+function ProfilPanel({ setDisplayPanel, homeData }) {
+	const [emailChange, setEmailChange] = useState()
+	submitMail(emailChange);
+
 	return (
 		<BlurZone>
 			<PanelConteneur>
 				<Title>Mon Profil</Title>
 				<ProfilWrapper>
-					<OutilsProfil homeData={homeData}/>
-					<MailWrapper>
+					<OutilsProfil homeData={homeData} />
+					<MailWrapper
+						method="put"
+						onSubmit={(event) => {
+							submitMail(event)
+						}}
+					>
 						<MailTitle>Mail</MailTitle>
-						<MailInput placeholder={homeData.email} type="text"/>
+						<MailInput
+							placeholder={homeData.email}
+							type="text"
+							onInput={(e) => setEmailChange(e.target.value)}
+						/>
 						<MailButton type="submit">Submit</MailButton>
 					</MailWrapper>
 				</ProfilWrapper>
@@ -67,11 +81,11 @@ const CrossButton = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    cursor: pointer;
+	cursor: pointer;
 
-    &:hover{
-        transform: scale(1.1);
-    }
+	&:hover {
+		transform: scale(1.1);
+	}
 `
 const Title = styled.h2`
 	position: absolute;
@@ -93,7 +107,7 @@ const ProfilWrapper = styled.div`
 	/* background-color: green; */
 `
 
-const MailWrapper = styled.div`
+const MailWrapper = styled.form`
 	height: 15%;
 	margin-top: 70px;
 	color: white;
@@ -104,7 +118,6 @@ const MailWrapper = styled.div`
 `
 const MailTitle = styled.h3`
 	margin-right: 20px;
-
 `
 
 const MailInput = styled.input`
@@ -117,7 +130,7 @@ const MailInput = styled.input`
 	font-weight: bold;
 	color: ${colors.primary};
 
-	&::placeholder{
+	&::placeholder {
 		color: ${colors.primary};
 	}
 

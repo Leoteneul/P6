@@ -9,9 +9,6 @@ import styled from 'styled-components'
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
 	const [homeData, setHomeData] = useState({})
-	
-	
-  
 
 	useEffect(() => {
 		const userId = localStorage.getItem("id");

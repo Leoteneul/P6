@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
+// const fs = require('fs')
 
 
 exports.signup = (req, res, next) => {
@@ -19,7 +20,8 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password: hash,
             job: '.' ,
-            name: '.'
+            name: '.',
+            imageUrl: `${req.protocol}://${req.get('host')}/images/profilDefault.png`
         });
         user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur Créé !'}))
@@ -67,3 +69,25 @@ exports.home = (req, res, next) => {
    .then((user) => res.status(200).json(user))
    .catch(error => res.status(404).json({ error }))
 };
+
+exports.modifyProfil = (req, res, next) => {
+        
+    console.log(req)
+
+};
+
+exports.modifyEmail = (req, res, next) => {
+
+    const newMail = req.body.email
+    User.findOne({ _id: req.auth.userId })
+    .then(() => {
+
+        User.updateOne({ _id: req.auth.userId}, {'email': newMail})
+            .then(() => res.status(200).json({message: 'Objet Modifié'}))
+            .catch(error => res.status(401).json({ error }))
+
+
+    })
+
+
+}

@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express();
+
 const routeUser = require('./routes/user')
 const cors = require('cors')
+const path = require('path')
 
 
 mongoose.connect(String(process.env.MONGOOSE_URL),
@@ -22,8 +24,8 @@ app.use((req, res, next) => {
 
 
 app.use(cors())
-
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/users', routeUser)
 
 

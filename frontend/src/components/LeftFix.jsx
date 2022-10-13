@@ -18,7 +18,7 @@ function LeftFix({setDisplayPanel, homeData}) {
   return (
     <LeftFixConteneur>
       <OutilsProfil homeData={homeData} />
-      <Widget setDisplayPanel={setDisplayPanel}/>
+      <Widget homeData={homeData} setDisplayPanel={setDisplayPanel}/>
     </LeftFixConteneur>
   )
 }

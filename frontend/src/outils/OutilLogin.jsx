@@ -22,17 +22,12 @@ function OutilLogin() {
 			}),
 		})
 
-
-		const id = await rawResponse.json();
+		const id = await rawResponse.json()
 		localStorage.setItem('id', id.token)
-		
-	
-		
-		if (rawResponse.ok) {
 
+		if (rawResponse.ok) {
 			navigate(`/home`)
 			console.log(rawResponse)
-			
 		}
 	}
 
@@ -45,9 +40,15 @@ function OutilLogin() {
 				}}
 			>
 				<LoginTitle>Email:</LoginTitle>
-				<LoginInput type="text" onInput={(e) => setEmailLogin(e.target.value)} />
+				<LoginInput
+					type="text"
+					onInput={(e) => setEmailLogin(e.target.value)}
+				/>
 				<LoginTitle>Mot de Passe:</LoginTitle>
-				<LoginInput type="text" onInput={(e) => setPasswordLogin(e.target.value)} />
+				<LoginInput
+					type="text"
+					onInput={(e) => setPasswordLogin(e.target.value)}
+				/>
 				<LoginButton type="submit">Se Connecter</LoginButton>
 			</LoginForm>
 		</LoginWrapper>
