@@ -4,11 +4,11 @@ import { colors, shading } from '../style/utils'
 import { FaTimes } from 'react-icons/fa'
 import Footer from './Footer'
 import { useState } from 'react'
-import submitMail from '../hooks/HookSubmitMail'
+import { hookPutMail } from '../hooks/ApiHook'
+
 
 function ProfilPanel({ setDisplayPanel, homeData }) {
 	const [emailChange, setEmailChange] = useState()
-	submitMail(emailChange);
 
 	return (
 		<BlurZone>
@@ -18,8 +18,8 @@ function ProfilPanel({ setDisplayPanel, homeData }) {
 					<OutilsProfil homeData={homeData} />
 					<MailWrapper
 						method="put"
-						onSubmit={(event) => {
-							submitMail(event)
+						onSubmit={(e) => {
+							hookPutMail(emailChange, e)
 						}}
 					>
 						<MailTitle>Mail</MailTitle>

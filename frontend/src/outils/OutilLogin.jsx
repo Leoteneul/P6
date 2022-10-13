@@ -2,41 +2,20 @@ import styled from 'styled-components'
 import { colors, screenSize, shading } from '../style/utils'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { hookPostLogin } from '../hooks/ApiHook'
 
 function OutilLogin() {
 	const [emailLogin, setEmailLogin] = useState('')
 	const [passwordLogin, setPasswordLogin] = useState('')
 	const navigate = useNavigate()
-	async function submitForm(e) {
-		e.preventDefault()
-
-		const rawResponse = await fetch('http://localhost:3000/api/users/login', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: emailLogin,
-				password: passwordLogin,
-			}),
-		})
-
-		const id = await rawResponse.json()
-		localStorage.setItem('id', id.token)
-
-		if (rawResponse.ok) {
-			navigate(`/home`)
-			console.log(rawResponse)
-		}
-	}
+	
 
 	return (
 		<LoginWrapper>
 			<LoginForm
 				method="post"
-				onSubmit={(event) => {
-					submitForm(event)
+				onSubmit={(e) => {
+					hookPostLogin(e, navigate, emailLogin, passwordLogin)
 				}}
 			>
 				<LoginTitle>Email:</LoginTitle>

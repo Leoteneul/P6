@@ -8,7 +8,7 @@ import GlobalStyle from '../style/GlobalStyle'
 
 function Login({ setUserId }){
 
-    
+    localStorage.removeItem('id')
 	return (
             <LoginConteneur>
                 <GlobalStyle></GlobalStyle>

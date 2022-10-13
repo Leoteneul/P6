@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
-// const fs = require('fs')
+const fs = require('fs')
 
 
 exports.signup = (req, res, next) => {
@@ -24,7 +24,14 @@ exports.signup = (req, res, next) => {
             imageUrl: `${req.protocol}://${req.get('host')}/images/profilDefault.png`
         });
         user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur Créé !'}))
+        .then(() => res.status(200).json({
+            userId: user._id,
+            token: jwt.sign(
+                {userId: user._id},
+                'salt',
+                { expiresIn: '24h' }
+            )
+        }))
         .catch(error => res.status(400).json({ error }))
     })
     .catch(error => res.status(500).json({ error }));
@@ -71,8 +78,32 @@ exports.home = (req, res, next) => {
 };
 
 exports.modifyProfil = (req, res, next) => {
+    console.log(req.file)
+    const profil = req.file ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : {...req.body};
+
+      delete profil._userId;
+
+      User.findOne({_id: req.auth.userId})
+      .then((user) => {
         
-    console.log(req)
+        const filename = user.imageUrl.split('/images/')[1];
+        if(req.file && filename != 'profilDefault.png'){
+            fs.unlink(`images/${filename}`, (error) => {
+                if(error){
+                    throw error
+                }
+            })}
+            
+
+          User.updateOne({ _id: req.auth.userId}, {...profil, _id:req.auth.userId})
+            .then(() => res.status(200).json({ message: 'Objet modifié!'}))
+            .catch(error => res.status(401).json({ error }));
+        }
+      )
+      .catch((error) => res.status(400).json({ error }));
 
 };
 

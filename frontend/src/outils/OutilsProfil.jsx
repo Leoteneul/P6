@@ -3,47 +3,20 @@ import { colors } from '../style/utils'
 import { shading } from '../style/utils'
 import { useState } from 'react'
 import { FaSave } from 'react-icons/fa'
-
+import { hookPutProfil } from '../hooks/ApiHook'
 function OutilsProfil({ homeData }) {
 	const [nameChange, setNameChange] = useState()
 	const [jobChange, setJobChange] = useState()
 	const [pictureChange, setPictureChange] = useState({})
 	const [isProfilFocus, setProfilFocus] = useState(false)
 	let formData = new FormData()
-	async function submitNewProfil(e) {
-		e.preventDefault();
-		
-		formData.append('file', pictureChange)
-		formData.append('job', jobChange)
-		formData.append('name', nameChange)
-		
-		
-		
-		
-		console.log(formData)
-		const userId = localStorage.getItem('id')
-		const response = await fetch('http://localhost:3000/api/users/profil', {
-			method: 'PUT',
-			headers: {
-				Authorization: userId
-			},
-			body: formData
-
-			
-				
-			
-			
-		})
-
-		console.log(response)
-	}
 
 	return (
 		<ProfilContainer
 			method="put"
 			enctype="multipart/form-data"
-			onSubmit={(event) => {
-				submitNewProfil(event)
+			onSubmit={(e) => {
+				hookPutProfil(nameChange, jobChange, pictureChange, formData, e)
 			}}
 			onMouseOver={() => setProfilFocus(true)}
 			onMouseOut={() => setProfilFocus(false)}
@@ -56,10 +29,10 @@ function OutilsProfil({ homeData }) {
 			<PictureContainer>
 				<PictureWrapper>
 					<Picture src={homeData.imageUrl} alt="photo de profil" />
-					<PictureInput 
-					type="file"
-					name='image'
-					onChange={(e) => setPictureChange(e.target.files[0])}
+					<PictureInput
+						type="file"
+						name="image"
+						onChange={(e) => setPictureChange(e.target.files[0])}
 					/>
 				</PictureWrapper>
 				<Status>En Ligne</Status>
@@ -121,7 +94,6 @@ const PictureContainer = styled.div`
 	z-index: 2;
 `
 const PictureWrapper = styled.div`
-	background-color: #164b7a;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -133,7 +105,7 @@ const PictureWrapper = styled.div`
 	position: relative;
 `
 const PictureInput = styled.input`
-	display: flex;
+	display: hidden;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -141,6 +113,7 @@ const PictureInput = styled.input`
 	padding: 40px 0 0 0;
 	z-index: 40;
 	cursor: pointer;
+	opacity: 0;
 `
 const Picture = styled.img`
 	max-height: 200px;

@@ -2,36 +2,19 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { colors, screenSize, shading } from '../style/utils'
+import { hookPostSignup } from '../hooks/ApiHook'
 
 function OutilSignUp() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
-	async function submitForm(e) {
-		e.preventDefault()
-
-		const rawResponse = await fetch('http://localhost:3000/api/users/signup', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password,
-			}),
-		})
-
-		if (rawResponse.ok) {
-			navigate('/home')
-		}
-	}
+	
 	return (
 		<SignUpWrapper>
 			<SignUpForm
 				method="post"
-				onSubmit={(event) => {
-					submitForm(event)
+				onSubmit={(e) => {
+					hookPostSignup(email, password, e, navigate)
 				}}
 			>
 				<SignUpTitle>Email:</SignUpTitle>

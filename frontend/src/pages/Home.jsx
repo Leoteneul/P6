@@ -5,34 +5,15 @@ import ProfilPanel from '../components/ProfilPanel'
 import RightFix from '../components/RightFix'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { hookGetHome } from '../hooks/ApiHook'
 
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
 	const [homeData, setHomeData] = useState({})
 
 	useEffect(() => {
-		const userId = localStorage.getItem("id");
-		async function fetchHome(){
-      
-			const response = await fetch('http://localhost:3000/api/users/home', {
-				method: 'GET',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-          
-          			Authorization: userId
-				},
-
-				
-			})
-			const homeData = await response.json()
-			setHomeData(homeData)
-      
-      
-		}
-		fetchHome()
+		hookGetHome(setHomeData)
 	}, [])
-	
 
 	return (
 		<HomeConteneur>
