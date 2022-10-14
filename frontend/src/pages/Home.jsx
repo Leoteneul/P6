@@ -6,6 +6,7 @@ import RightFix from '../components/RightFix'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { hookGetHome } from '../hooks/ApiHook'
+import PostPanel from '../components/PostPanel'
 
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
@@ -19,6 +20,12 @@ function Home() {
 		<HomeConteneur>
 			<LeftFix homeData={homeData} setDisplayPanel={setDisplayPanel} />
 			<Header />
+			<PostPanel homeData={homeData}/>
+
+
+
+
+
 			<RightFix />
 			{isDisplayPanel ? (
 				<ProfilPanel homeData={homeData} setDisplayPanel={setDisplayPanel} />

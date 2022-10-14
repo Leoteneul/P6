@@ -132,3 +132,34 @@ export const hookPostSignup = async (email, password, e, navigate) => {
 		navigate('/home')
 	}
 }
+
+export const hookPostCreatePost = async (e, postContent, postImage, formData, homeData) => {
+
+
+	try {
+		if (postContent !== undefined) {
+			formData.append('description', postContent)
+		}
+		if (postImage !== undefined) {
+			formData.append('file', postImage)
+		}
+		
+		formData.append('name', homeData)
+
+		e.preventDefault()
+		const userId = localStorage.getItem('id')
+		const response = await fetch('http://localhost:3000/api/post/create', {
+			method: 'POST',
+			headers: {
+				Authorization: userId,
+			},
+			body: formData,
+	})
+	console.log(response.json())
+	} catch (error) {
+		
+	}
+	
+
+
+}
