@@ -6,10 +6,12 @@ const postSchema = mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     likes: { type: Number },
+    my: { type: Boolean},
     commentaires: { type: Array },
     usersLiked: { type: Array },
-    imageUrl: { type: String }
-
+    imageUrl: { type: String },
+    imagePostUrl: { type: String }
+    
     
 });
 

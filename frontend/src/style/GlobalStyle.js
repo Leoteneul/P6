@@ -31,6 +31,38 @@ const GlobalStyle = createGlobalStyle`
   }
   
   
+
+  @keyframes likeAnim {
+
+0% {
+  opacity: 0;
+}
+
+100% {
+  opacity: 1;
+  
+}
+}
+
+
+*{
+  margin: 0;
+  padding: 0 0 0 0;
+  box-sizing: border-box;
+  font-family: 'Lato';
+}
+
+
+
+
+
+
+
+
+
+
+
+
   body {
     
     display: flex;
@@ -43,7 +75,15 @@ const GlobalStyle = createGlobalStyle`
     color: ${colors.primary};
     }
     
-  
+  hr{
+    color: ${colors.primary};
+    background-color: ${colors.primary};
+    border: none;
+    width: 90%;
+    height: 1px;
+    margin-left: 5%;
+    
+  }
   `
 
 

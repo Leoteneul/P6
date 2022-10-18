@@ -6,7 +6,7 @@ const LogoConteneur = styled.header`
   justify-content: center;
   align-items: center;
   width: 40%;
-  height: 200px;
+  min-height: 200px;
   border-radius: 0 0 50px 50px;
   background-color: white;
   overflow: hidden;

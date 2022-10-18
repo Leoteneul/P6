@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { hookGetHome } from '../hooks/ApiHook'
 import PostPanel from '../components/PostPanel'
+import PostItem from '../components/PostItem'
 
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
@@ -21,7 +22,9 @@ function Home() {
 			<LeftFix homeData={homeData} setDisplayPanel={setDisplayPanel} />
 			<Header />
 			<PostPanel homeData={homeData}/>
-
+			<PostWrapper>
+			<PostItem homeData={homeData} />
+			</PostWrapper>
 
 
 
@@ -42,5 +45,13 @@ const HomeConteneur = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`
+
+const PostWrapper = styled.div`
+
+	width: 38%;
+	
+	/* background-color: yellow; */
+
 `
 export default Home

@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
+const Post = require('../models/Post')
 
 
 exports.signup = (req, res, next) => {
@@ -102,9 +103,13 @@ exports.modifyProfil = (req, res, next) => {
             .then(() => res.status(200).json({ message: 'Objet modifié!'}))
             .catch(error => res.status(401).json({ error }));
         }
+
+        
       )
       .catch((error) => res.status(400).json({ error }));
 
+      
+      
 };
 
 exports.modifyEmail = (req, res, next) => {

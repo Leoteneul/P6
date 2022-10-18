@@ -53,9 +53,19 @@ try {
 		},
 		body: formData,
 	})
+
+	const response2 = await fetch('http://localhost:3000/api/post/modifyAll', {
+		method: 'PUT',
+		headers: {
+			Authorization: userId,
+		},
+		body: formData,
+	})
+
 	const json = await response.json()
+	const json2 = await response2.json()
 	alert('Profil modifié')
-	console.log(json)
+	console.log(json, json2)
 
 } catch (error) {
 	alert('Une erreur est survenue. Veuillez réessayer..')
@@ -144,7 +154,8 @@ export const hookPostCreatePost = async (e, postContent, postImage, formData, ho
 			formData.append('file', postImage)
 		}
 		
-		formData.append('name', homeData)
+		formData.append('name', homeData.name)
+		formData.append('imageUrl', homeData.imageUrl)
 
 		e.preventDefault()
 		const userId = localStorage.getItem('id')
@@ -159,7 +170,78 @@ export const hookPostCreatePost = async (e, postContent, postImage, formData, ho
 	} catch (error) {
 		
 	}
+	window.location.reload()	
+
+
+}
+
+export const hookGetAllPost = async (setAllPost) => {
+
+	const userId = localStorage.getItem('id')
+	const response = await fetch('http://localhost:3000/api/post/show', {
+
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+					'Content-Type': 'application/json',
+			Authorization: userId,
+		},
+			
+		
+
+	})
+	const json = await response.json()
+	setAllPost(json)
+}
+
+export const hookDeletePost = async (_id) => {
+	
+	
 	
 
+	
+	const userId = localStorage.getItem('id')
+	const response = await fetch('http://localhost:3000/api/post/deletePost', {
+
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+					'Content-Type': 'application/json',
+			Authorization: userId,
+		},
+
+		body: JSON.stringify({
+			postId: _id,
+		}),
+	})
+	const json = await response.json()
+	console.log(json)
+	window.location.reload()
+	
+
+}
+
+export const hookModifyOne = async (_id, modifiedDescription) => {
+	
+	const userId = localStorage.getItem('id')
+	const response = await fetch('http://localhost:3000/api/post/modifyOne', {
+
+		method: 'PUT',
+		headers: {
+			Accept: 'application/json',
+					'Content-Type': 'application/json',
+			Authorization: userId,
+		},
+
+		body: JSON.stringify({
+			postId: _id,
+			description: modifiedDescription
+		}),
+	})
+	const json = await response.json()
+	console.log(json)
+	window.location.reload()
+	
+	
 
 }

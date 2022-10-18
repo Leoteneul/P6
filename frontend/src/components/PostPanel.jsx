@@ -15,7 +15,7 @@ function PostPanel({ homeData }) {
 			method="put"
 			enctype="multipart/form-data"
 			onSubmit={(e) => {
-				hookPostCreatePost(e, postContent, postImage, formData, homeData.name)
+				hookPostCreatePost(e, postContent, postImage, formData, homeData)
 			}}
 		>
 			<Title>Exprimez vous..</Title>
@@ -42,8 +42,8 @@ const PostPanelConteneur = styled.form`
 	flex-direction: column;
 	justify-content: flex-end;
 
-	height: 35%;
-	width: 40%;
+	min-height: 35%;
+	width: 38%;
 	padding: 20px 50px 0 50px;
 	border-radius: 20px;
 	background-color: white;

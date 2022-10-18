@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import App from './App';
 import Home from './pages/Home'
 import Login from './pages/Login'
-import GlobalStyle from './style/GlobalStyle'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

@@ -70,7 +70,6 @@ function Widget({setDisplayPanel, homeData}) {
     const heure = now.getHours()
     const minute = now.getMinutes()
 
-    console.log(heure, minute)
   return (
     
     <LinkConteneur>
