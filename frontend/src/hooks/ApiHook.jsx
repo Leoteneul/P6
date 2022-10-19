@@ -245,3 +245,29 @@ export const hookModifyOne = async (_id, modifiedDescription) => {
 	
 
 }
+export const hookPostLike = async (myLike, homeData, postId) => {
+	
+	const token = localStorage.getItem('id')
+
+	const response = await fetch('http://localhost:3000/api/post/like', {
+		
+		
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+					'Content-Type': 'application/json',
+			Authorization: token,
+		},
+
+		body: JSON.stringify({
+			postId: postId,
+			like: myLike,
+			userId: homeData._id
+		}),
+	})
+
+	const json = await response.json()
+	console.log(json)
+
+	
+}
