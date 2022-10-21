@@ -5,6 +5,7 @@ const app = express();
 
 const routeUser = require('./routes/user')
 const routePost = require('./routes/post')
+const routeCoworker = require('./routes/coworker')
 const cors = require('cors')
 const path = require('path')
 
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/users', routeUser)
 app.use('/api/post', routePost)
+app.use('/api/coworker', routeCoworker)
 
 
-  module.exports = app
+module.exports = app

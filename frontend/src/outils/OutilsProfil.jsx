@@ -4,7 +4,7 @@ import { shading } from '../style/utils'
 import { useState } from 'react'
 import { FaSave } from 'react-icons/fa'
 import { hookPutProfil } from '../hooks/ApiHook'
-function OutilsProfil({ homeData }) {
+function OutilsProfil({ homeData, isUser }) {
 	const [nameChange, setNameChange] = useState()
 	const [jobChange, setJobChange] = useState()
 	const [pictureChange, setPictureChange] = useState({})
@@ -12,7 +12,7 @@ function OutilsProfil({ homeData }) {
 	let formData = new FormData()
 
 	return (
-		<ProfilContainer
+		<ProfilContainer isUser={isUser}
 			method="put"
 			enctype="multipart/form-data"
 			onSubmit={(e) => {
@@ -23,6 +23,7 @@ function OutilsProfil({ homeData }) {
 		>
 			<Name
 				type="text"
+				disabled={isUser}
 				defaultValue={homeData.name}
 				onInput={(e) => setNameChange(e.target.value)}
 			/>
@@ -32,6 +33,7 @@ function OutilsProfil({ homeData }) {
 					<PictureInput
 						type="file"
 						name="image"
+						disabled={isUser}
 						onChange={(e) => setPictureChange(e.target.files[0])}
 					/>
 				</PictureWrapper>
@@ -39,10 +41,12 @@ function OutilsProfil({ homeData }) {
 			</PictureContainer>
 			<Job
 				type="text"
+				disabled={isUser}
 				defaultValue={homeData.job}
 				onInput={(e) => setJobChange(e.target.value)}
 			/>
-			{isProfilFocus ? (
+			
+			{isProfilFocus && isUser === false ? (
 				<SubmitButton type="submit">
 					<FaSave />
 				</SubmitButton>
@@ -75,6 +79,7 @@ const Name = styled.input`
 	z-index: 6;
 	border: none;
 	color: ${colors.primary};
+	
 	text-align: center;
 	&:focus {
 		outline-color: ${colors.primary};

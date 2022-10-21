@@ -175,7 +175,7 @@ export const hookPostCreatePost = async (e, postContent, postImage, formData, ho
 
 }
 
-export const hookGetAllPost = async (setAllPost) => {
+export const hookGetAllPost = async (setAllPost, isUser, homeData) => {
 
 	const userId = localStorage.getItem('id')
 	const response = await fetch('http://localhost:3000/api/post/show', {
@@ -191,6 +191,12 @@ export const hookGetAllPost = async (setAllPost) => {
 
 	})
 	const json = await response.json()
+	
+	if(isUser){
+		const filteredPost = json.filter(post => post.userId === homeData._id)
+		setAllPost(filteredPost)
+		return
+	}
 	setAllPost(json)
 }
 
@@ -270,4 +276,44 @@ export const hookPostLike = async (myLike, homeData, postId) => {
 	console.log(json)
 
 	
+}
+
+export const hookGetAllUsers = async (setUserData) => {
+	const userId = localStorage.getItem("id");
+			const response = await fetch('http://localhost:3000/api/coworker/getAllCoworker', {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+          
+          			Authorization: userId
+				},
+
+				
+			})
+			const json = await response.json()
+			
+			setUserData(json)
+}
+
+export const hookGetOneUser = async (setCoworkerData, lui) => {
+
+	const userId = localStorage.getItem("id");
+			const response = await fetch(`http://localhost:3000/api/coworker/getOneCoworker/${lui}`, {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+          
+          			Authorization: userId
+				},
+				
+
+				
+			})
+			const json = await response.json()
+			const userData = JSON.parse(JSON.stringify(json))
+			
+			setCoworkerData(userData)
+			
 }

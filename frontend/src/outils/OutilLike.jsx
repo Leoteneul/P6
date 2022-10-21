@@ -26,13 +26,13 @@ function OutilLike({ usersLiked, homeData, likes, postId }) {
     
     useEffect(() => {
         
-        if(usersLiked.includes(homeData._id)){
+        if(usersLiked.includes(homeData.userHome)){
             setLiked(true)
             return
             
         }
         
-    }, [homeData._id, usersLiked])
+    }, [homeData.userHome, usersLiked])
 
 	return (
 		<ItemsButtonsWrapper>

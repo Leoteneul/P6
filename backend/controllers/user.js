@@ -74,7 +74,15 @@ exports.home = (req, res, next) => {
 
     
    User.findOne({ _id: req.auth.userId })
-   .then((user) => res.status(200).json(user))
+  
+   .then((user) => {
+    const profil = {
+        ...user._doc,
+        userHome: req.auth.userId
+    }
+
+    res.status(200).json(profil)
+   })
    .catch(error => res.status(404).json({ error }))
 };
 

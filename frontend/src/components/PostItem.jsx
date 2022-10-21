@@ -7,12 +7,12 @@ import GlobalStyle from '../style/GlobalStyle'
 import OutilLike from '../outils/OutilLike'
 import Outildescription from '../outils/OutilDescription'
 
-function PostItem({ homeData }) {
+function PostItem({ homeData, isUser }) {
 	const [allPost, setAllPost] = useState([])
 
 	useEffect(() => {
-		hookGetAllPost(setAllPost)
-	}, [])
+		hookGetAllPost(setAllPost, isUser, homeData)
+	}, [isUser, homeData])
 
 	return (
 		<div>
@@ -40,7 +40,7 @@ function PostItem({ homeData }) {
 						<hr />
 
 						{/* Affichage des boutons pour l'user hote sinon description */}
-						{homeData._id === userId ? (
+						{homeData.userHome === userId ? (
 							<Outildescription description={description} postId={_id} />
 						) : (
 							<DescriptionText>{description}</DescriptionText>
@@ -100,6 +100,7 @@ const ImagePost = styled.img`
 const UserImg = styled.img`
 	height: 50px;
 	width: 50px;
+	border-radius: 25px;
 	margin-right: 20px;
 `
 

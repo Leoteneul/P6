@@ -5,31 +5,31 @@ import ProfilPanel from '../components/ProfilPanel'
 import RightFix from '../components/RightFix'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { hookGetHome } from '../hooks/ApiHook'
+import { hookGetAllUsers, hookGetHome } from '../hooks/ApiHook'
 import PostPanel from '../components/PostPanel'
 import PostItem from '../components/PostItem'
 
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
 	const [homeData, setHomeData] = useState({})
+	const [userData, setUserData] = useState([])
+	const isUser = false
 
 	useEffect(() => {
 		hookGetHome(setHomeData)
+		hookGetAllUsers(setUserData)
+		
 	}, [])
 
 	return (
 		<HomeConteneur>
-			<LeftFix homeData={homeData} setDisplayPanel={setDisplayPanel} />
+			<LeftFix homeData={homeData} isUser={isUser} setDisplayPanel={setDisplayPanel} />
 			<Header />
-			<PostPanel homeData={homeData}/>
+			<PostPanel homeData={homeData} />
 			<PostWrapper>
-			<PostItem homeData={homeData} />
+				<PostItem homeData={homeData} isUser={isUser}/>
 			</PostWrapper>
-
-
-
-
-			<RightFix />
+			<RightFix userData={userData} setUserData={setUserData}/>
 			{isDisplayPanel ? (
 				<ProfilPanel homeData={homeData} setDisplayPanel={setDisplayPanel} />
 			) : null}
@@ -48,10 +48,8 @@ const HomeConteneur = styled.div`
 `
 
 const PostWrapper = styled.div`
-
 	width: 38%;
-	
-	/* background-color: yellow; */
 
+	/* background-color: yellow; */
 `
 export default Home

@@ -60,7 +60,11 @@ const GlobalStyle = createGlobalStyle`
 
 
 
-
+  span{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+  }
 
 
   body {
@@ -82,6 +86,7 @@ const GlobalStyle = createGlobalStyle`
     width: 90%;
     height: 1px;
     margin-left: 5%;
+    z-index: 90;
     
   }
   `

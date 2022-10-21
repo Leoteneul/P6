@@ -86,7 +86,7 @@ exports.getLiked = (req, res, next) => {
 
     Post.findOne({ _id: req.body.postId })
         .then(post => {
-            const userCanLike = !post.usersLiked.includes(req.body.userId)
+            const userCanLike = !post.usersLiked.includes(req.auth.userId)
             const userWantsToLike = req.body.like === 1; 
 
             if(userCanLike && userWantsToLike){
@@ -94,7 +94,7 @@ exports.getLiked = (req, res, next) => {
                 Post.updateOne({_id: req.body.postId},
                    {
                         $inc : {likes : 1},
-                        $push : {usersLiked : req.body.userId}
+                        $push : {usersLiked : req.auth.userId}
                    })
 
                 .then(() => res.status(201).json({ message: "Like ajouté" }))
@@ -105,7 +105,7 @@ exports.getLiked = (req, res, next) => {
                 Post.updateOne({_id: req.body.postId},
                    {
                         $inc : {likes : -1},
-                        $pull : {usersLiked : req.body.userId}
+                        $pull : {usersLiked : req.auth.userId}
                    })
 
                 .then(() => res.status(201).json({ message: "Like supprimé" }))

@@ -1,7 +1,42 @@
 import styled from 'styled-components'
-import { FaPaperPlane, FaAt, FaUser } from 'react-icons/fa'
+import { FaAt, FaUser } from 'react-icons/fa'
 import { colors, shading } from '../style/utils'
 import GlobalStyle from '../style/GlobalStyle'
+import { Link } from 'react-router-dom'
+
+
+
+function Widget({setDisplayPanel, homeData, isUser}) {
+    const now = new Date()
+    const heure = now.getHours()
+    const minute = now.getMinutes()
+
+  return (
+    
+    <LinkConteneur>
+    <GlobalStyle />
+      <StyledLink onClick={() => setDisplayPanel(true)}>
+        {isUser ? (<LinkHome to='/home'>Profil</LinkHome>) 
+        : 
+        (<WidgetTitle>Profil</WidgetTitle>)}
+        
+        <StyledIcon>
+          <FaUser />
+        </StyledIcon>
+      </StyledLink>
+      <StyledLink>
+        <WidgetTitle $isEmail >{homeData.email}</WidgetTitle>
+        <StyledIcon>
+          <FaAt />
+        </StyledIcon>
+      </StyledLink>
+      <Time>{heure}:{minute}</Time>
+    </LinkConteneur>
+  )
+}
+
+export default Widget
+
 
 const LinkConteneur = styled.div`
   display: flex;
@@ -28,6 +63,21 @@ const StyledLink = styled.div`
   &:hover {
     animation: widgetDisplay 1s forwards;   
   }
+`
+
+const LinkHome = styled(Link)`
+
+color: white;
+  width: 300px;
+  height: 60px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${colors.primary};
+  text-decoration: none;
+  font-weight: bold;
+
 `
 
 const WidgetTitle = styled.h2`
@@ -64,38 +114,3 @@ const Time = styled.h2`
   min-width: 120px;
   background-color: white;
 `
-
-function Widget({setDisplayPanel, homeData}) {
-    const now = new Date()
-    const heure = now.getHours()
-    const minute = now.getMinutes()
-
-  return (
-    
-    <LinkConteneur>
-    <GlobalStyle />
-      <StyledLink onClick={() => setDisplayPanel(true)}>
-      
-        <WidgetTitle>Profil</WidgetTitle>
-        <StyledIcon>
-          <FaUser />
-        </StyledIcon>
-      </StyledLink>
-      <StyledLink>
-        <WidgetTitle $isEmail >{homeData.email}</WidgetTitle>
-        <StyledIcon>
-          <FaAt />
-        </StyledIcon>
-      </StyledLink>
-      <StyledLink>
-        <WidgetTitle>Contact</WidgetTitle>
-        <StyledIcon>
-          <FaPaperPlane />
-        </StyledIcon>
-      </StyledLink>
-      <Time>{heure}:{minute}</Time>
-    </LinkConteneur>
-  )
-}
-
-export default Widget

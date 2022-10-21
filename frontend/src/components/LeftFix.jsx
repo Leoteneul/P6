@@ -11,14 +11,14 @@ const LeftFixConteneur = styled.div`
     left: 0;
   `
 
-function LeftFix({setDisplayPanel, homeData}) {
+function LeftFix({setDisplayPanel, homeData, isUser}) {
   
   
   
   return (
     <LeftFixConteneur>
-      <OutilsProfil homeData={homeData} />
-      <Widget homeData={homeData} setDisplayPanel={setDisplayPanel}/>
+      <OutilsProfil homeData={homeData} isUser={isUser}/>
+      <Widget homeData={homeData} isUser={isUser} setDisplayPanel={setDisplayPanel}/>
     </LeftFixConteneur>
   )
 }
