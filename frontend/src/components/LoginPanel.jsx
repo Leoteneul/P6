@@ -28,7 +28,8 @@ const PanelConteneur = styled.div`
 	width: 50%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	justify-content: flex-start;
+	/* background-color: red; */
 
 	@media (max-width: ${screenSize.tablet}) {
 		width: 80%;
@@ -36,13 +37,14 @@ const PanelConteneur = styled.div`
 
 	@media (max-width: ${screenSize.mobile}) {
 		width: 100%;
+		height: 100%;
 	}
 `
 
 const TitleWrapper = styled.div`
 	width: 100%;
 	height: 5%;
-	margin-top: 60px;
+	margin-top: 20px;
 
 	/* background-color: green; */
 	display: flex;
@@ -51,7 +53,7 @@ const TitleWrapper = styled.div`
 const Title = styled.h3`
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	min-width: 20%;
 	color: ${colors.primary};
 	border-radius: 15px 15px 0 0;
@@ -71,7 +73,7 @@ const BigTitle = styled.h1`
 	color: ${colors.primary};
 	font-size: 50px;
 	align-self: flex-start;
-	margin-top: 50px;
+	margin-top: 20px;
 
 	@media (max-width: ${screenSize.mobile}) {
 		padding-left: 20px;

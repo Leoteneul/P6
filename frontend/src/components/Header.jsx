@@ -1,6 +1,21 @@
 import styled from 'styled-components'
 import logo from '../assets/logo.png'
 
+
+
+
+function Header() {
+  return (
+    <LogoConteneur>
+      <Logo src={logo} alt="logogroupo" />
+      
+    </LogoConteneur>
+    
+  )
+}
+
+export default Header
+
 const LogoConteneur = styled.header`
   display: flex;
   justify-content: center;
@@ -10,6 +25,7 @@ const LogoConteneur = styled.header`
   border-radius: 0 0 50px 50px;
   background-color: white;
   overflow: hidden;
+  position: relative;
 
   @media (max-width: 1024px) {
     
@@ -27,12 +43,4 @@ const Logo = styled.img`
   width: 85%;
   
 `
-function Header() {
-  return (
-    <LogoConteneur>
-      <Logo src={logo} alt="logogroupo" />
-    </LogoConteneur>
-  )
-}
 
-export default Header

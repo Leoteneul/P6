@@ -271,10 +271,6 @@ export const hookPostLike = async (myLike, homeData, postId) => {
 			userId: homeData._id
 		}),
 	})
-
-	const json = await response.json()
-	console.log(json)
-
 	
 }
 

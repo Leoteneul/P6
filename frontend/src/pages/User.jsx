@@ -7,12 +7,20 @@ import RightFix from '../components/RightFix'
 import { hookGetAllUsers } from '../hooks/ApiHook'
 
 import { hookGetOneUser } from '../hooks/ApiHook'
+import { handleLeftAndRight, screenSize } from '../style/utils'
 
 function User() {
 	const [coworkerData, setCoworkerData] = useState({})
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
     const [userData, setUserData] = useState([])
+	const [isLeftFixActive, updateIsLeftFix] = useState(false)
+	const [isRightFixActive, updateIsRightFix] = useState(false)
     const isUser = true
+
+	window.onresize = () => {
+		handleLeftAndRight(updateIsLeftFix)
+		handleLeftAndRight(updateIsRightFix)
+	}
 
 	function handleGetUser() {
         const url = window.location
@@ -26,6 +34,8 @@ function User() {
 	useEffect(() => {
 		handleGetUser()
         hookGetAllUsers(setUserData)
+		handleLeftAndRight(updateIsLeftFix)
+		handleLeftAndRight(updateIsRightFix)
         
 	}, [])
 
@@ -36,12 +46,19 @@ function User() {
 				isDisplayPanel={isDisplayPanel}
 				setDisplayPanel={setDisplayPanel}
                 isUser={isUser}
+				isLeftFixActive={isLeftFixActive}
+				updateIsLeftFix={updateIsLeftFix}
 			/>
 			<Header />
             <PostWrapper>
 				<PostItem homeData={coworkerData} isUser={isUser}/>
 			</PostWrapper>
-            <RightFix userData={userData} setUserData={setUserData}/>
+            <RightFix 
+			userData={userData}
+			setUserData={setUserData}
+			isRightFixActive={isRightFixActive}
+			updateIsRightFix={updateIsRightFix}
+			/>
 			
 		</UserConteneur>
 	)
@@ -61,6 +78,14 @@ const UserConteneur = styled.div`
 
 const PostWrapper = styled.div`
 	width: 38%;
+	z-index: 0;
+	@media (max-width: ${screenSize.tablet}) {
+		width: 76%;
+	}
+	@media (max-width: ${screenSize.mobile}) {
+		width: 100%;
+	}
+	
 
 	/* background-color: yellow; */
 `

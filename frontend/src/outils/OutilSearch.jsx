@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
-import { colors } from "../style/utils"
+import { colors, shading } from "../style/utils"
 
-function OutilSearch({userData, updateTabSearch, tabSearch}){
+function OutilSearch({userData, updateTabSearch}){
     const [isSearch, updateIsSearch] = useState('')
 
     useEffect(() => {
@@ -41,9 +41,9 @@ export default OutilSearch
 const SearchWrapper = styled.div`
 
 background-color: white;
-border-radius: 20px 20px 0 0;
-
+border-radius: 20px 0 0 0;
 padding: 40px 20px 0 20px;
+box-shadow: ${shading};
 
 `
 

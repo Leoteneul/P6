@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import GlobalStyle from '../style/GlobalStyle'
-import { colors } from '../style/utils'
+import { colors, shading } from '../style/utils'
 import { Link } from 'react-router-dom'
 
 function OutilUser({ userData }) {
@@ -38,22 +38,19 @@ const UsersWrapper = styled.div`
 	flex-direction: column;
 	background-color: white;
 	height: 50%;
-	border-radius: 0 0 20px 20px;
+	border-radius: 0 0 0 20px;
 	padding: 40px 20px 0 20px;
 	overflow-y: scroll;
+	box-shadow: ${shading};
 `
 
 const UserTitle = styled.h2`
-
 padding-bottom: 10px;
 margin-bottom: 20px;
 border-bottom: 1px solid red;
 
 `
 const UserConteneur = styled.div`
-
-
-
 `
 const UsersBox = styled(Link)`
 	background-color: ${colors.secondary};
@@ -63,7 +60,6 @@ const UsersBox = styled(Link)`
     text-decoration: none;
     border-radius: 10px;
     cursor: pointer;
-	/* max-height: 60px; */
 `
 
 const UserName = styled.h3`

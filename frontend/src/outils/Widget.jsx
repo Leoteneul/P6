@@ -3,13 +3,22 @@ import { FaAt, FaUser } from 'react-icons/fa'
 import { colors, shading } from '../style/utils'
 import GlobalStyle from '../style/GlobalStyle'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 
 
 function Widget({setDisplayPanel, homeData, isUser}) {
-    const now = new Date()
-    const heure = now.getHours()
-    const minute = now.getMinutes()
+  const [dateState, setDateState] = useState(new Date());
+
+  function handleCopy(){
+    navigator.clipboard.writeText(homeData.email)
+    alert('Email ajouté au presse papier')
+  }
+
+  useEffect(() => {
+         setInterval(() => setDateState(new Date()), 30000);
+  }, []);
+
 
   return (
     
@@ -24,13 +33,17 @@ function Widget({setDisplayPanel, homeData, isUser}) {
           <FaUser />
         </StyledIcon>
       </StyledLink>
-      <StyledLink>
+      <StyledLink onClick={handleCopy}>
         <WidgetTitle $isEmail >{homeData.email}</WidgetTitle>
         <StyledIcon>
           <FaAt />
         </StyledIcon>
       </StyledLink>
-      <Time>{heure}:{minute}</Time>
+      <Time>{dateState.toLocaleString('fr-FR', {
+        hour: 'numeric',
+        minute: 'numeric',
+        
+      })}</Time>
     </LinkConteneur>
   )
 }
@@ -42,9 +55,10 @@ const LinkConteneur = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 50%;
+  height: 45%;
   width: 100%;
   position: relative;
+  
 `
 
 const StyledLink = styled.div`
@@ -52,7 +66,7 @@ const StyledLink = styled.div`
   justify-content: flex-end;
   max-width: 80px;
   padding-right: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
   border-radius: 0 20px 20px 0;
   overflow: hidden;
   background-color: ${colors.primary};
@@ -111,6 +125,7 @@ const Time = styled.h2`
   margin-top: 40px;
   border-radius: 0 20px 20px 0;
   height: 15%;
+  min-height: 50px;
   min-width: 120px;
   background-color: white;
 `

@@ -4,32 +4,62 @@ import LeftFix from '../components/LeftFix'
 import ProfilPanel from '../components/ProfilPanel'
 import RightFix from '../components/RightFix'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { hookGetAllUsers, hookGetHome } from '../hooks/ApiHook'
 import PostPanel from '../components/PostPanel'
 import PostItem from '../components/PostItem'
+import { colors, handleLeftAndRight, screenSize } from '../style/utils'
+import { FaSignOutAlt } from 'react-icons/fa'
+
 
 function Home() {
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
 	const [homeData, setHomeData] = useState({})
 	const [userData, setUserData] = useState([])
+	const [isLeftFixActive, updateIsLeftFix] = useState(false)
+	const [isRightFixActive, updateIsRightFix] = useState(false)
 	const isUser = false
+
+	
+
+	window.onresize = () => {
+		handleLeftAndRight(updateIsLeftFix)
+		handleLeftAndRight(updateIsRightFix)
+	}
+	
 
 	useEffect(() => {
 		hookGetHome(setHomeData)
 		hookGetAllUsers(setUserData)
+		handleLeftAndRight(updateIsLeftFix)
+		handleLeftAndRight(updateIsRightFix)
+		
 		
 	}, [])
 
 	return (
 		<HomeConteneur>
-			<LeftFix homeData={homeData} isUser={isUser} setDisplayPanel={setDisplayPanel} />
+			<LogOut to='/'><FaSignOutAlt /></LogOut>
+			<LeftFix
+				homeData={homeData}
+				isUser={isUser}
+				setDisplayPanel={setDisplayPanel}
+				isLeftFixActive={isLeftFixActive}
+				updateIsLeftFix={updateIsLeftFix}
+			/>
+
 			<Header />
 			<PostPanel homeData={homeData} />
 			<PostWrapper>
-				<PostItem homeData={homeData} isUser={isUser}/>
+				<PostItem homeData={homeData} isUser={isUser} />
 			</PostWrapper>
-			<RightFix userData={userData} setUserData={setUserData}/>
+			<RightFix
+				userData={userData}
+				setUserData={setUserData}
+				isRightFixActive={isRightFixActive}
+				updateIsRightFix={updateIsRightFix}
+			/>
 			{isDisplayPanel ? (
 				<ProfilPanel homeData={homeData} setDisplayPanel={setDisplayPanel} />
 			) : null}
@@ -49,7 +79,26 @@ const HomeConteneur = styled.div`
 
 const PostWrapper = styled.div`
 	width: 38%;
+	z-index: 0;
+	@media (max-width: ${screenSize.tablet}) {
+		width: 76%;
+	}
+	@media (max-width: ${screenSize.mobile}) {
+		width: 100%;
+	}
+`
+const LogOut = styled(Link)`
 
-	/* background-color: yellow; */
+
+position: absolute;
+top: 0;
+right: 50px;
+background-color: ${colors.primary};
+color: white;
+font-size: 25px;
+padding: 10px 15px;
+border-radius: 0 0 10px 10px;
+z-index: 50;
+
 `
 export default Home

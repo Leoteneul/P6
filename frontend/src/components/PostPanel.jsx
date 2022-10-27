@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { hookPostCreatePost } from '../hooks/ApiHook'
-import { colors, shading } from '../style/utils'
+import { colors, screenSize, shading } from '../style/utils'
 
 
 function PostPanel({ homeData }) {
@@ -49,6 +49,16 @@ const PostPanelConteneur = styled.form`
 	background-color: white;
 	box-shadow: ${shading};
 	margin-top: 50px;
+	@media (max-width: ${screenSize.tablet}) {
+		width: 76%;
+    
+    
+	}
+	@media (max-width: ${screenSize.mobile}) {
+		width: 100%;
+		border-radius: 0;
+		padding: 20px 25px 0 25px;
+	}
 `
 
 const Title = styled.h1`

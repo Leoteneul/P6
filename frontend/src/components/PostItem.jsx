@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { hookGetAllPost } from '../hooks/ApiHook'
-import { colors, shading } from '../style/utils'
+import { colors, screenSize, shading } from '../style/utils'
 import { useEffect, useState } from 'react'
 
 import GlobalStyle from '../style/GlobalStyle'
@@ -76,6 +76,13 @@ const Test = styled.div`
 	border-radius: 20px;
 	margin-top: 40px;
 	border-bottom: 3px solid ${colors.primary};
+	@media (max-width: ${screenSize.mobile}) {
+		
+		
+		border-radius: 0;
+		
+	}
+	
 `
 
 const InfoUserWrapper = styled.div`
@@ -95,6 +102,16 @@ const DescriptionText = styled.p`
 const ImagePost = styled.img`
 	height: 600px;
 	margin-bottom: 20px;
+	@media (max-width: ${screenSize.tablet}) {
+		
+		max-height: 500px;
+		
+	}
+	@media (max-width: ${screenSize.mobile}) {
+		
+		max-height: 400px;
+		
+	}
 `
 
 const UserImg = styled.img`

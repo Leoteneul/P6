@@ -25,7 +25,7 @@ function OutilLogin() {
 				/>
 				<LoginTitle>Mot de Passe:</LoginTitle>
 				<LoginInput
-					type="text"
+					type="password"
 					onInput={(e) => setPasswordLogin(e.target.value)}
 				/>
 				<LoginButton type="submit">Se Connecter</LoginButton>
@@ -37,7 +37,7 @@ function OutilLogin() {
 export default OutilLogin
 
 const LoginWrapper = styled.div`
-	height: 50%;
+	height:60%;
 	width: 100%;
 	background-color: white;
 	display: flex;
@@ -57,6 +57,7 @@ const LoginWrapper = styled.div`
 `
 const LoginForm = styled.form`
 	width: 60%;
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
