@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     job: { type: String },
     name: { type: String },
-    imageUrl: { type: String, required: true}
+    imageUrl: { type: String, required: true},
+    isAdmin:{ type: Boolean, required: true}
 
     
 });

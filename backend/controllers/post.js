@@ -1,5 +1,6 @@
 const Post = require('../models/Post')
-const fs = require('fs')
+const fs = require('fs');
+const User = require('../models/User');
 
 exports.createPost = (req, res, next) => {
 
@@ -16,7 +17,7 @@ exports.createPost = (req, res, next) => {
     });
 
     post.save()
-        .then(() => res.status(201).json({ message: 'Le Post est ajouté à la liste'}))
+        .then(() => res.status(201).json({ message: 'Le post est ajouté à la liste'}))
         .catch(error => res.status(400).json({ error }));
 
 
@@ -48,38 +49,55 @@ exports.modifyAllPost = (req, res, next) => {
 }
 
 exports.modifyOnePost = (req, res, next) => {
-
-    Post.findOne({_id: req.body.postId})
+    User.findOne({ _id: req.auth.userId })
+    .then(user => {
+        Post.findOne({_id: req.body.postId})
     .then(post => {
-        if(post.userId != req.auth.userId){
+        if(post.userId != req.auth.userId && user.isAdmin !== true){
             res.status(403).json({ error })
         }else{
             Post.updateOne({ _id: req.body.postId }, {description: req.body.description })
-                .then(() => res.status(200).json({ message: 'Description modifié'}))
+                .then(() => res.status(200).json({ message: 'Description modifiée'}))
                 .catch(error => res.status(401).json({ error }))
         }
     })
     .catch(error => res.status(500).json({ error }))
+
+
+
+
+    })
+    .catch(error => res.status(500).json({ error}))
+    
+    
     
 
 }
 
 exports.deletePost = (req, res, next) => {
-    
-    Post.findOne({_id: req.body.postId})
+
+    User.findOne({ _id: req.auth.userId })
+    .then(user => {
+
+        Post.findOne({_id: req.body.postId})
         .then(post => {
-            if(post.userId != req.auth.userId){
+            if(post.userId != req.auth.userId && user.isAdmin !== true){
                 res.status(403).json({ error })
             }else{
                 const filename = post.imagePostUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     Post.deleteOne({ _id: req.body.postId})
-                        .then(() => res.status(200).json({ message: 'La sauce a bien été supprimé' }))
+                        .then(() => res.status(200).json({ message: 'Le post a bien été supprimé' }))
                         .catch(error => res.status(401).json({ error }));
                 })
             }
         })
         .catch(error => res.status(500).json({ error }));
+
+    })
+    .catch(error => res.status(500).json({ error }))
+    
+    
 }
 
 exports.getLiked = (req, res, next) => {

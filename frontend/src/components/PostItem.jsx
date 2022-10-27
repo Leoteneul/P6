@@ -40,7 +40,7 @@ function PostItem({ homeData, isUser }) {
 						<hr />
 
 						{/* Affichage des boutons pour l'user hote sinon description */}
-						{homeData.userHome === userId ? (
+						{homeData.userHome === userId || homeData.isAdmin === true ? (
 							<Outildescription description={description} postId={_id} />
 						) : (
 							<DescriptionText>{description}</DescriptionText>

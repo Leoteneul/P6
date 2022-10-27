@@ -13,6 +13,7 @@ function OutilLogin() {
 	return (
 		<LoginWrapper>
 			<LoginForm
+				action='/home'
 				method="post"
 				onSubmit={(e) => {
 					hookPostLogin(e, navigate, emailLogin, passwordLogin)

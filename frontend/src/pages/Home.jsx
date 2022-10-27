@@ -22,6 +22,7 @@ function Home() {
 	const isUser = false
 
 	
+	
 
 	window.onresize = () => {
 		handleLeftAndRight(updateIsLeftFix)
@@ -34,6 +35,7 @@ function Home() {
 		hookGetAllUsers(setUserData)
 		handleLeftAndRight(updateIsLeftFix)
 		handleLeftAndRight(updateIsRightFix)
+		return
 		
 		
 	}, [])

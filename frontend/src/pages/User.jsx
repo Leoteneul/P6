@@ -25,9 +25,9 @@ function User() {
 	function handleGetUser() {
         const url = window.location
 		const params = url.search
-		const lui = params.split('=')[1]
+		const coworkerId = params.split('=')[1]
         
-		hookGetOneUser(setCoworkerData, lui)
+		hookGetOneUser(setCoworkerData, coworkerId)
         
 	}
 

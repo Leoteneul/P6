@@ -1,40 +1,23 @@
 
+import { client, clientMultipart } from './Axios-config'
 
-// Hook route PUT changement de profil
-export const hookPutMail = async (emailChange, e) =>  {
+
+export const hookPutMail = async (emailChange, e) => {
+	e.preventDefault()
+	const response = await client.put('/users/email', { email: emailChange })
+	alert(response.message)
+	window.location.reload()
+}
+
+export const hookPutProfil = async (
+	nameChange,
+	jobChange,
+	pictureChange,
+	formData,
+	e
+) => {
 	e.preventDefault()
 
-	try {
-		const userId = localStorage.getItem('id')
-	const response = await fetch('http://localhost:3000/api/users/email', {
-		method: 'PUT',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-			Authorization: userId,
-		},
-
-		body: JSON.stringify({
-			email: emailChange,
-		}),
-	})
-
-	const mailData = await response.json()
-	console.log(mailData)
-	alert('Email modifié!')
-	} catch (error) {
-		alert("Une erreur est survenue pour le changement d'email. Veuillez réessayer")
-	}finally{
-		window.location.reload()
-	}
-	
-};
-
-// Hook route PUT changement de profile
-export const hookPutProfil = async (nameChange, jobChange, pictureChange, formData, e) => {
-	e.preventDefault()
-try {
-	
 	if (nameChange !== undefined) {
 		formData.append('name', nameChange)
 	}
@@ -45,271 +28,103 @@ try {
 		formData.append('file', pictureChange)
 	}
 
-	const userId = localStorage.getItem('id')
-	const response = await fetch('http://localhost:3000/api/users/profil', {
-		method: 'PUT',
-		headers: {
-			Authorization: userId,
-		},
-		body: formData,
-	})
+	const response = await clientMultipart.put('/users/profil', formData)
+	clientMultipart.put('/post/modifyAll', formData)
 
-	const response2 = await fetch('http://localhost:3000/api/post/modifyAll', {
-		method: 'PUT',
-		headers: {
-			Authorization: userId,
-		},
-		body: formData,
-	})
-
-	const json = await response.json()
-	const json2 = await response2.json()
-	alert('Profil modifié')
-	console.log(json, json2)
-
-} catch (error) {
-	alert('Une erreur est survenue. Veuillez réessayer..')
-}finally{
+	alert(response.message)
 	window.location.reload()
-	
-}
-	
-};
-
-// Hook route GET recup donnes home/user
-export const hookGetHome = async (setHomeData) => {
-	const userId = localStorage.getItem("id");
-			const response = await fetch('http://localhost:3000/api/users/home', {
-				method: 'GET',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-          
-          			Authorization: userId
-				},
-
-				
-			})
-			const json = await response.json()
-			const userData = JSON.parse(JSON.stringify(json))
-			setHomeData(userData)
 }
 
-// Hook route POST login
 export const hookPostLogin = async (e, navigate, emailLogin, passwordLogin) => {
 	e.preventDefault()
+	const payload = { email: emailLogin, password: passwordLogin }
+	const response = await client.post('/users/login', payload)
 
-		const rawResponse = await fetch('http://localhost:3000/api/users/login', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: emailLogin,
-				password: passwordLogin,
-			}),
-		})
-
-		const id = await rawResponse.json()
-		localStorage.setItem('id', id.token)
-
-		if (rawResponse.ok) {
-			navigate(`/home`)
-			
-		}
+	localStorage.setItem('id', response.token)
+	navigate('/home')
 }
 
-// Hook route POST signup
+export const hookGetHome = async (setHomeData) => {
+	const response = await client.get('/users/home')
+	setHomeData(response)
+}
+
 export const hookPostSignup = async (email, password, e, navigate) => {
 	e.preventDefault()
-	const rawResponse = await fetch('http://localhost:3000/api/users/signup', {
-		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			email: email,
-			password: password,
-		}),
-	})
-	
-	const id = await rawResponse.json()
-		localStorage.setItem('id', id.token)
+	const payload = { email: email, password: password }
+	const response = await client.post('/users/signup', payload)
 
-	if (rawResponse.ok) {
-		navigate('/home')
-	}
+	localStorage.setItem('id', response.token)
+	navigate('/home')
 }
 
-export const hookPostCreatePost = async (e, postContent, postImage, formData, homeData) => {
-
-
-	try {
+export const hookPostCreatePost = async (
+	e,
+	postContent,
+	postImage,
+	formData,
+	homeData
+) => {
+		e.preventDefault()
 		if (postContent !== undefined) {
 			formData.append('description', postContent)
 		}
 		if (postImage !== undefined) {
 			formData.append('file', postImage)
 		}
-		
 		formData.append('name', homeData.name)
 		formData.append('imageUrl', homeData.imageUrl)
-
-		e.preventDefault()
-		const userId = localStorage.getItem('id')
-		const response = await fetch('http://localhost:3000/api/post/create', {
-			method: 'POST',
-			headers: {
-				Authorization: userId,
-			},
-			body: formData,
-	})
-	console.log(response.json())
-	} catch (error) {
+		const response = await clientMultipart.post('/post/create', formData)
 		
-	}
-	window.location.reload()	
-
-
+		alert(response.message)
+		window.location.reload()
+	
 }
 
 export const hookGetAllPost = async (setAllPost, isUser, homeData) => {
+	const response = await client.get('/post/show')
 
-	const userId = localStorage.getItem('id')
-	const response = await fetch('http://localhost:3000/api/post/show', {
-
-		method: 'GET',
-		headers: {
-			Accept: 'application/json',
-					'Content-Type': 'application/json',
-			Authorization: userId,
-		},
-			
-		
-
-	})
-	const json = await response.json()
-	
-	if(isUser){
-		const filteredPost = json.filter(post => post.userId === homeData._id)
+	if (isUser) {
+		const filteredPost = response.filter((post) => post.userId === homeData._id)
 		setAllPost(filteredPost)
 		return
 	}
-	setAllPost(json)
+	setAllPost(response)
 }
 
 export const hookDeletePost = async (_id) => {
-	
-	
-	
-
-	
-	const userId = localStorage.getItem('id')
-	const response = await fetch('http://localhost:3000/api/post/deletePost', {
-
-		method: 'DELETE',
-		headers: {
-			Accept: 'application/json',
-					'Content-Type': 'application/json',
-			Authorization: userId,
-		},
-
-		body: JSON.stringify({
-			postId: _id,
-		}),
-	})
-	const json = await response.json()
-	console.log(json)
+	const response = await client.delete('/post/deletePost', {data: {postId:_id}})
+	alert(response.message)
 	window.location.reload()
-	
-
 }
 
 export const hookModifyOne = async (_id, modifiedDescription) => {
-	
-	const userId = localStorage.getItem('id')
-	const response = await fetch('http://localhost:3000/api/post/modifyOne', {
-
-		method: 'PUT',
-		headers: {
-			Accept: 'application/json',
-					'Content-Type': 'application/json',
-			Authorization: userId,
-		},
-
-		body: JSON.stringify({
-			postId: _id,
-			description: modifiedDescription
-		}),
-	})
-	const json = await response.json()
-	console.log(json)
+	const payload = {
+		postId: _id,
+		description: modifiedDescription,
+	}
+	const response = await client.put('/post/modifyOne', payload)
+	alert(response.message)
 	window.location.reload()
-	
-	
-
 }
+
 export const hookPostLike = async (myLike, homeData, postId) => {
-	
-	const token = localStorage.getItem('id')
+	const payload = {
 
-	const response = await fetch('http://localhost:3000/api/post/like', {
-		
-		
-		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-					'Content-Type': 'application/json',
-			Authorization: token,
-		},
-
-		body: JSON.stringify({
-			postId: postId,
+		postId: postId,
 			like: myLike,
-			userId: homeData._id
-		}),
-	})
-	
+			userId: homeData._id,
+
+	}
+	client.post('/post/like', payload)	
 }
 
 export const hookGetAllUsers = async (setUserData) => {
-	const userId = localStorage.getItem("id");
-			const response = await fetch('http://localhost:3000/api/coworker/getAllCoworker', {
-				method: 'GET',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-          
-          			Authorization: userId
-				},
-
-				
-			})
-			const json = await response.json()
-			
-			setUserData(json)
+	const response = await client.get('/coworker/getAllCoworker')
+	setUserData(response)
 }
 
-export const hookGetOneUser = async (setCoworkerData, lui) => {
-
-	const userId = localStorage.getItem("id");
-			const response = await fetch(`http://localhost:3000/api/coworker/getOneCoworker/${lui}`, {
-				method: 'GET',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-          
-          			Authorization: userId
-				},
-				
-
-				
-			})
-			const json = await response.json()
-			const userData = JSON.parse(JSON.stringify(json))
-			
-			setCoworkerData(userData)
-			
+export const hookGetOneUser = async (setCoworkerData, coworkerId) => {
+	const response = await client.get(`/coworker/getOneCoworker/${coworkerId}`)
+	setCoworkerData(response)
 }

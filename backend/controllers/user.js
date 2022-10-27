@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
     
     if(!strongPassword.test(req.body.password)){
 
-        return res.status(400).json({message: 'mdp tropeee simple'})
+        return res.status(400).json({message: 'Le mot de passe ne convient pas'})
         
     }else{
         
@@ -22,7 +22,8 @@ exports.signup = (req, res, next) => {
             password: hash,
             job: '.' ,
             name: '.',
-            imageUrl: `${req.protocol}://${req.get('host')}/images/profilDefault.png`
+            imageUrl: `${req.protocol}://${req.get('host')}/images/profilDefault.png`,
+            isAdmin: false
         });
         user.save()
         .then(() => res.status(200).json({
@@ -44,7 +45,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email})
         .then(user => {
             if(user === null){
-                res.status(401).json({ message: 'La paire email/mot eeeeeeede passe ne corresponds pas'})
+                res.status(401).json({ message: 'La paire email/mot de passe ne corresponds pas'})
             }else {
                 bcrypt.compare(req.body.password, user.password)
                     .then(valid => {
@@ -87,7 +88,6 @@ exports.home = (req, res, next) => {
 };
 
 exports.modifyProfil = (req, res, next) => {
-    console.log(req.file)
     const profil = req.file ? {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -108,7 +108,7 @@ exports.modifyProfil = (req, res, next) => {
             
 
           User.updateOne({ _id: req.auth.userId}, {...profil, _id:req.auth.userId})
-            .then(() => res.status(200).json({ message: 'Objet modifié!'}))
+            .then(() => res.status(200).json({ message: 'Profil Modifié !'}))
             .catch(error => res.status(401).json({ error }));
         }
 
@@ -127,7 +127,7 @@ exports.modifyEmail = (req, res, next) => {
     .then(() => {
 
         User.updateOne({ _id: req.auth.userId}, {'email': newMail})
-            .then(() => res.status(200).json({message: 'Objet Modifié'}))
+            .then(() => res.status(200).json({message: 'Email Modifié'}))
             .catch(error => res.status(401).json({ error }))
 
 
