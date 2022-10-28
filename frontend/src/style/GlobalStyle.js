@@ -55,13 +55,15 @@ const GlobalStyle = createGlobalStyle`
 
 
 
-
+button{
+  background-color: ${colors.tertiary};
+}
 
 
 
 
   span{
-    color: black;
+    color: ${colors.tertiary};
     font-weight: bold;
     font-size: 15px;
   }
@@ -81,7 +83,7 @@ const GlobalStyle = createGlobalStyle`
     
   hr{
     color: ${colors.primary};
-    background-color: ${colors.primary};
+    background-color: ${colors.tertiary};
     border: none;
     width: 90%;
     height: 1px;

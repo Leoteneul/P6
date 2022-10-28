@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express();
-
+const helmet = require('helmet');
 const routeUser = require('./routes/user')
 const routePost = require('./routes/post')
 const routeCoworker = require('./routes/coworker')
@@ -27,6 +27,9 @@ app.use((req, res, next) => {
 
 app.use(cors())
 app.use(express.json());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/users', routeUser)
 app.use('/api/post', routePost)

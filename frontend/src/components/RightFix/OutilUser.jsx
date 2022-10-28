@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import GlobalStyle from '../style/GlobalStyle'
-import { colors, shading } from '../style/utils'
+import GlobalStyle from '../../style/GlobalStyle'
+import { colors, shading } from '../../style/utils'
 import { Link } from 'react-router-dom'
 
 function OutilUser({ userData }) {

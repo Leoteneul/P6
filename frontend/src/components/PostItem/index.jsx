@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { hookGetAllPost } from '../hooks/ApiHook'
-import { colors, screenSize, shading } from '../style/utils'
+import { hookGetAllPost } from '../../hooks/ApiHook'
+import { colors, screenSize, shading } from '../../style/utils'
 import { useEffect, useState } from 'react'
 
-import GlobalStyle from '../style/GlobalStyle'
-import OutilLike from '../outils/OutilLike'
-import Outildescription from '../outils/OutilDescription'
+import GlobalStyle from '../../style/GlobalStyle'
+import OutilLike from './OutilLike'
+import Outildescription from './OutilDescription'
 
 function PostItem({ homeData, isUser }) {
 	const [allPost, setAllPost] = useState([])
@@ -75,14 +75,10 @@ const Test = styled.div`
 	box-shadow: ${shading};
 	border-radius: 20px;
 	margin-top: 40px;
-	border-bottom: 3px solid ${colors.primary};
+	border-bottom: 3px solid ${colors.tertiary};
 	@media (max-width: ${screenSize.mobile}) {
-		
-		
 		border-radius: 0;
-		
 	}
-	
 `
 
 const InfoUserWrapper = styled.div`
@@ -103,22 +99,19 @@ const ImagePost = styled.img`
 	height: 600px;
 	margin-bottom: 20px;
 	@media (max-width: ${screenSize.tablet}) {
-		
 		max-height: 500px;
-		
 	}
 	@media (max-width: ${screenSize.mobile}) {
-		
 		max-height: 400px;
-		
 	}
 `
 
 const UserImg = styled.img`
-	height: 50px;
-	width: 50px;
-	border-radius: 25px;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
 	margin-right: 20px;
+	border: 2px solid ${colors.tertiary};
 `
 
 const UserName = styled.h3`

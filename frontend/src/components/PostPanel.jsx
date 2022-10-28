@@ -41,7 +41,7 @@ const PostPanelConteneur = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-
+z-index: 50;
 	min-height: 35%;
 	width: 38%;
 	padding: 20px 50px 0 50px;
@@ -84,7 +84,7 @@ const InputFileLabel = styled.label`
 	border-radius: 0 0 20px 20px;
 	height: 15%;
 	width: 20%;
-	background-color: ${colors.primary};
+	background-color: ${colors.tertiary};
 	font-size: 20px;
 	cursor: pointer;
 	margin-left: 20px;
@@ -102,7 +102,6 @@ const SubmitButton = styled.button`
 	width: 40%;
 	align-self: center;
 	border-radius: 20px 20px 0 0;
-	background-color: ${colors.primary};
 	color: white;
 	font-size: 25px;
 	border: none;

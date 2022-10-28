@@ -1,7 +1,7 @@
 
 import styled from 'styled-components'
-import { hookDeletePost, hookModifyOne } from '../hooks/ApiHook'
-import { colors } from '../style/utils'
+import { hookDeletePost, hookModifyOne } from '../../hooks/ApiHook'
+import { colors } from '../../style/utils'
 import { FaTimes, FaCog, FaShareSquare } from 'react-icons/fa'
 import { useState } from 'react'
 
@@ -54,7 +54,7 @@ const DescriptionInput = styled.input`
 	padding: 20px 40px 20px 40px;
 	outline-color: ${colors.primary};
 	border: 1px solid ${colors.primary};
-    width: 100%;
+	width: 100%;
 `
 const DescriptionText = styled.p`
 	padding: 20px 40px 20px 40px;
@@ -82,7 +82,6 @@ const OutilPost = styled.button`
 	margin-right: 15px;
 	border-radius: 18px;
 	border: none;
-	background-color: ${colors.primary};
 	cursor: pointer;
 
 	&:hover {

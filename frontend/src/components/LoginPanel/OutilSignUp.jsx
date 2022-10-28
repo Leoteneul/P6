@@ -1,44 +1,36 @@
-import styled from 'styled-components'
-import { colors, screenSize, shading } from '../style/utils'
 import { useState } from 'react'
+import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { hookPostLogin } from '../hooks/ApiHook'
+import { colors, screenSize, shading } from '../../style/utils'
+import { hookPostSignup } from '../../hooks/ApiHook'
 
-function OutilLogin() {
-	const [emailLogin, setEmailLogin] = useState('')
-	const [passwordLogin, setPasswordLogin] = useState('')
+function OutilSignUp() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
 	
-
 	return (
-		<LoginWrapper>
-			<LoginForm
-				action='/home'
+		<SignUpWrapper>
+			<SignUpForm
 				method="post"
 				onSubmit={(e) => {
-					hookPostLogin(e, navigate, emailLogin, passwordLogin)
+					hookPostSignup(email, password, e, navigate)
 				}}
 			>
-				<LoginTitle>Email:</LoginTitle>
-				<LoginInput
-					type="text"
-					onInput={(e) => setEmailLogin(e.target.value)}
-				/>
-				<LoginTitle>Mot de Passe:</LoginTitle>
-				<LoginInput
-					type="password"
-					onInput={(e) => setPasswordLogin(e.target.value)}
-				/>
-				<LoginButton type="submit">Se Connecter</LoginButton>
-			</LoginForm>
-		</LoginWrapper>
+				<SignUpTitle>Email:</SignUpTitle>
+				<SignUpInput type="text" onInput={(e) => setEmail(e.target.value)} />
+				<SignUpTitle>Mot de Passe:</SignUpTitle>
+				<SignUpInput type="password" onInput={(e) => setPassword(e.target.value)} />
+				<SignUpButton type="submit">S'inscrire</SignUpButton>
+			</SignUpForm>
+		</SignUpWrapper>
 	)
 }
 
-export default OutilLogin
+export default OutilSignUp
 
-const LoginWrapper = styled.div`
-	height:60%;
+const SignUpWrapper = styled.div`
+	height: 60%;
 	width: 100%;
 	background-color: white;
 	display: flex;
@@ -56,19 +48,18 @@ const LoginWrapper = styled.div`
 		height: 95%;
 	}
 `
-const LoginForm = styled.form`
+const SignUpForm = styled.form`
 	width: 60%;
-	
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 `
 
-const LoginTitle = styled.h2`
+const SignUpTitle = styled.h2`
 	margin-top: 40px;
 `
 
-const LoginInput = styled.input`
+const SignUpInput = styled.input`
 	border: 2px solid ${colors.primary};
 	height: 10%;
 	border-radius: 20px;
@@ -83,7 +74,7 @@ const LoginInput = styled.input`
 	}
 `
 
-const LoginButton = styled.button`
+const SignUpButton = styled.button`
 	background-color: ${colors.primary};
 	height: 15%;
 	padding: 0 20px 0 20px;

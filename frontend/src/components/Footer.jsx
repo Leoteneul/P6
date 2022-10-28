@@ -10,7 +10,7 @@ const FooterConteneur = styled.footer`
 	bottom: 0;
 	height: 15%;
 	width: 100%;
-	background-color: ${colors.primary};
+	background-color: ${colors.tertiary};
 `
 
 export default Footer

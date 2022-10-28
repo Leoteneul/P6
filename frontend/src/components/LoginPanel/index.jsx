@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 import { useState } from 'react'
-import OutilLogin from '../outils/OutilLogin'
-import OutilSignUp from '../outils/OutilSignUp'
-import { colors, screenSize } from '../style/utils'
+import OutilLogin from './OutilLogin'
+import OutilSignUp from './OutilSignUp'
+import { colors, screenSize } from '../../style/utils'
 function LoginPanel() {
 	const [isLoginDisplay, setLoginDisplay] = useState(true)
 	return (
@@ -45,10 +45,9 @@ const TitleWrapper = styled.div`
 	width: 100%;
 	height: 5%;
 	margin-top: 20px;
-
-	/* background-color: green; */
 	display: flex;
 	justify-content: flex-end;
+	
 `
 const Title = styled.h3`
 	display: flex;
@@ -63,14 +62,14 @@ const Title = styled.h3`
 	${({ active }) =>
 		active &&
 		`
-    background: ${colors.primary};
+    background: ${colors.tertiary};
 	color: white;
 	border-bottom: none;
 	z-index: 15;
   `}
 `
 const BigTitle = styled.h1`
-	color: ${colors.primary};
+	color: ${colors.tertiary};
 	font-size: 50px;
 	align-self: flex-start;
 	margin-top: 20px;

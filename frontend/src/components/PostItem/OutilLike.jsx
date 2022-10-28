@@ -1,50 +1,39 @@
 import { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import styled from 'styled-components'
-import { hookPostLike } from '../hooks/ApiHook'
+import { hookPostLike } from '../../hooks/ApiHook'
 
-import { colors } from '../style/utils'
+import { colors } from '../../style/utils'
 
 function OutilLike({ usersLiked, homeData, likes, postId }) {
 	const [liked, setLiked] = useState(false)
-    const [count, updateCount] = useState(0)
-    function handleLike(){
-        let myLike = 0
-        if(liked){
-            setLiked(false)
-            updateCount(count - 1)
-            
+	const [count, updateCount] = useState(0)
+	function handleLike() {
+		let myLike = 0
+		if (liked) {
+			setLiked(false)
+			updateCount(count - 1)
+		} else {
+			setLiked(true)
+			updateCount(count + 1)
+			myLike = 1
+		}
+		hookPostLike(myLike, homeData, postId)
+	}
 
-        }else{
-            setLiked(true)
-            updateCount(count + 1)
-            myLike = 1
-
-        }
-        hookPostLike(myLike, homeData, postId)
-    }
-    
-    useEffect(() => {
-        
-        if(usersLiked.includes(homeData.userHome)){
-            setLiked(true)
-            return
-            
-        }
-        
-    }, [homeData.userHome, usersLiked])
+	useEffect(() => {
+		if (usersLiked.includes(homeData.userHome)) {
+			setLiked(true)
+			return
+		}
+	}, [homeData.userHome, usersLiked])
 
 	return (
 		<ItemsButtonsWrapper>
-			<ButtonPost
-            onClick={() => handleLike()}
-            
-            >Like</ButtonPost>
+			<ButtonPost onClick={() => handleLike()}>Like</ButtonPost>
 			<HeartDiv>
-                {liked ? (<FaHeartIcon />):(<FaRegHeart />)}
-				
-				
-				
+				{liked ? <FaHeartIcon /> : <FaRegHeart />}
+
 				{likes + count}
 			</HeartDiv>
 		</ItemsButtonsWrapper>
@@ -77,7 +66,7 @@ const ButtonPost = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		border-bottom: 4px solid ${colors.primary};
+		border-bottom: 4px solid ${colors.tertiary};
 		border-radius: 30px 30px 0 0;
 	}
 `

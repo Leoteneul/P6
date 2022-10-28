@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import OutilsProfil from '../outils/OutilsProfil'
-import Widget from '../outils/Widget'
-import { colors, screenSize, shading } from '../style/utils'
+import OutilsProfil from './OutilsProfil'
+import Widget from './Widget'
+import { screenSize, shading } from '../../style/utils'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 function LeftFix({
@@ -50,7 +50,6 @@ const LeftFixConteneur = styled.div`
 	flex-direction: column;
 	padding: 40px 0 0 0;
 	width: 20%;
-
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -59,20 +58,18 @@ const LeftFixConteneur = styled.div`
 		width: 40%;
 		top: 100px;
 		border-radius: 0 25px 25px 0;
-		${(props) => props.isLeftFixActive && `background-color: white; box-shadow: ${shading};`}
-		
+		${(props) =>
+			props.isLeftFixActive &&
+			`background-color: white; box-shadow: ${shading};`}
 	}
-
 	@media (max-width: ${screenSize.mobile}) {
 		${(props) => props.isLeftFixActive && ` width: 100%; height: 100%; top: 0;`}
 	}
-
-	
 `
 
 const ButtonLeftActive = styled.button`
 	display: none;
-	background-color: ${colors.primary};
+	background-color: #783201;
 	color: white;
 	font-size: 20px;
 	border: none;

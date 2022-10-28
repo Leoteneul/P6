@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FaAt, FaUser } from 'react-icons/fa'
-import { colors, shading } from '../style/utils'
-import GlobalStyle from '../style/GlobalStyle'
+import { colors, shading } from '../../style/utils'
+import GlobalStyle from '../../style/GlobalStyle'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -69,7 +69,7 @@ const StyledLink = styled.div`
   margin-top: 20px;
   border-radius: 0 20px 20px 0;
   overflow: hidden;
-  background-color: ${colors.primary};
+  background-color: ${colors.tertiary};
   text-decoration: none;
   box-shadow: ${shading};
   cursor: pointer;
@@ -81,28 +81,27 @@ const StyledLink = styled.div`
 
 const LinkHome = styled(Link)`
 
-color: white;
+
   width: 300px;
   height: 60px;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${colors.primary};
+  color: ${colors.tertiary};
   text-decoration: none;
   font-weight: bold;
 
 `
 
 const WidgetTitle = styled.h2`
-  color: white;
   width: 300px;
   height: 60px;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${colors.primary};
+  color: ${colors.tertiary};
   ${(props) =>
         props.$isEmail &&
         `font-size: 20px;`}
@@ -116,7 +115,7 @@ const StyledIcon = styled.div`
   color: white;
   height: 70px;
   width: 70px;
-  background-color: ${colors.primary};
+  background-color: ${colors.tertiary};
 `
 const Time = styled.h2`
   display: flex;
@@ -128,4 +127,5 @@ const Time = styled.h2`
   min-height: 50px;
   min-width: 120px;
   background-color: white;
+ 
 `

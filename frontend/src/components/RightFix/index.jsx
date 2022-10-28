@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import OutilSearch from '../outils/OutilSearch'
-import OutilUser from '../outils/OutilUser'
-import { colors, screenSize, shading } from '../style/utils'
+import OutilSearch from './OutilSearch'
+import OutilUser from './OutilUser'
+import { colors, screenSize, shading } from '../../style/utils'
 import { FaAddressBook } from 'react-icons/fa'
 
 function RightFix({ userData, isRightFixActive, updateIsRightFix }) {
@@ -71,8 +71,8 @@ const Test = styled.div`
 
 const ButtonRightActive = styled.button`
 	display: none;
-	background-color: ${colors.primary};
 	color: white;
+	background-color: ${colors.primary};
 	font-size: 20px;
 	border: none;
 	right: 0;

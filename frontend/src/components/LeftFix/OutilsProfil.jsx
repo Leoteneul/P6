@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { colors } from '../style/utils'
-import { shading } from '../style/utils'
+import { colors } from '../../style/utils'
+import { shading } from '../../style/utils'
 import { useState } from 'react'
 import { FaSave } from 'react-icons/fa'
-import { hookPutProfil } from '../hooks/ApiHook'
+import { hookPutProfil } from '../../hooks/ApiHook'
 function OutilsProfil({ homeData, isUser }) {
 	const [nameChange, setNameChange] = useState()
 	const [jobChange, setJobChange] = useState()
@@ -37,7 +37,7 @@ function OutilsProfil({ homeData, isUser }) {
 						onChange={(e) => setPictureChange(e.target.files[0])}
 					/>
 				</PictureWrapper>
-				<Status>En Ligne</Status>
+				
 			</PictureContainer>
 			<Job
 				type="text"
@@ -87,10 +87,10 @@ const Name = styled.input`
 `
 
 const PictureContainer = styled.div`
-	padding: 10px 0 0 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	height: 60%;
 	width: 70%;
 	border-radius: 0 0 20px 20px;
@@ -106,7 +106,7 @@ const PictureWrapper = styled.div`
 	width: 120px;
 	overflow: hidden;
 	border-radius: 60px;
-	border: 4px solid ${colors.enLigne};
+	border: 4px solid ${colors.tertiary};
 	position: relative;
 `
 const PictureInput = styled.input`
@@ -114,7 +114,6 @@ const PictureInput = styled.input`
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	/* background-color: red; */
 	padding: 40px 0 0 0;
 	z-index: 40;
 	cursor: pointer;
@@ -123,13 +122,6 @@ const PictureInput = styled.input`
 const Picture = styled.img`
 	max-height: 200px;
 	max-width: 200px;
-`
-
-const Status = styled.p`
-	margin-top: 10px;
-	padding-left: 15px;
-	color: ${colors.enLigne};
-	align-self: flex-start;
 `
 
 const Job = styled.input`
@@ -155,7 +147,6 @@ const SubmitButton = styled.button`
 	border-radius: 25px;
 	font-size: 20px;
 	border: none;
-	background-color: ${colors.primary};
 	right: 0;
 	bottom: 0;
 	z-index: 20;

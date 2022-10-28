@@ -5,17 +5,17 @@ import LeftFix from '../components/LeftFix'
 import PostItem from '../components/PostItem'
 import RightFix from '../components/RightFix'
 import { hookGetAllUsers } from '../hooks/ApiHook'
-
+import background from '../assets/background.png'
 import { hookGetOneUser } from '../hooks/ApiHook'
 import { handleLeftAndRight, screenSize } from '../style/utils'
 
 function User() {
 	const [coworkerData, setCoworkerData] = useState({})
 	const [isDisplayPanel, setDisplayPanel] = useState(false)
-    const [userData, setUserData] = useState([])
+	const [userData, setUserData] = useState([])
 	const [isLeftFixActive, updateIsLeftFix] = useState(false)
 	const [isRightFixActive, updateIsRightFix] = useState(false)
-    const isUser = true
+	const isUser = true
 
 	window.onresize = () => {
 		handleLeftAndRight(updateIsLeftFix)
@@ -23,43 +23,41 @@ function User() {
 	}
 
 	function handleGetUser() {
-        const url = window.location
+		const url = window.location
 		const params = url.search
 		const coworkerId = params.split('=')[1]
-        
+
 		hookGetOneUser(setCoworkerData, coworkerId)
-        
 	}
 
 	useEffect(() => {
 		handleGetUser()
-        hookGetAllUsers(setUserData)
+		hookGetAllUsers(setUserData)
 		handleLeftAndRight(updateIsLeftFix)
 		handleLeftAndRight(updateIsRightFix)
-        
 	}, [])
 
 	return (
 		<UserConteneur>
+			<Background />
 			<LeftFix
 				homeData={coworkerData}
 				isDisplayPanel={isDisplayPanel}
 				setDisplayPanel={setDisplayPanel}
-                isUser={isUser}
+				isUser={isUser}
 				isLeftFixActive={isLeftFixActive}
 				updateIsLeftFix={updateIsLeftFix}
 			/>
 			<Header />
-            <PostWrapper>
-				<PostItem homeData={coworkerData} isUser={isUser}/>
+			<PostWrapper>
+				<PostItem homeData={coworkerData} isUser={isUser} />
 			</PostWrapper>
-            <RightFix 
-			userData={userData}
-			setUserData={setUserData}
-			isRightFixActive={isRightFixActive}
-			updateIsRightFix={updateIsRightFix}
+			<RightFix
+				userData={userData}
+				setUserData={setUserData}
+				isRightFixActive={isRightFixActive}
+				updateIsRightFix={updateIsRightFix}
 			/>
-			
 		</UserConteneur>
 	)
 }
@@ -85,7 +83,15 @@ const PostWrapper = styled.div`
 	@media (max-width: ${screenSize.mobile}) {
 		width: 100%;
 	}
-	
 
 	/* background-color: yellow; */
+`
+
+const Background = styled.div`
+height: 100%;
+width: 100%;
+	
+	background-image: url(${background});
+	
+	position: fixed;
 `

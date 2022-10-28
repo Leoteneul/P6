@@ -30,7 +30,7 @@ exports.signup = (req, res, next) => {
             userId: user._id,
             token: jwt.sign(
                 {userId: user._id},
-                'salt',
+                String(process.env.SALT),
                 { expiresIn: '24h' }
             )
         }))
@@ -56,7 +56,7 @@ exports.login = (req, res, next) => {
                                 userId: user._id,
                                 token: jwt.sign(
                                     {userId: user._id},
-                                    'salt',
+                                    String(process.env.SALT),
                                     { expiresIn: '24h' }
                                 )
                             })

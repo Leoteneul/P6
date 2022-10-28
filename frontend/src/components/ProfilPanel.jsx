@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import OutilsProfil from '../outils/OutilsProfil'
+import OutilsProfil from './LeftFix/OutilsProfil'
 import { colors, screenSize, shading } from '../style/utils'
 import { FaTimes } from 'react-icons/fa'
 import Footer from './Footer'
@@ -83,7 +83,6 @@ const CrossButton = styled.button`
 	height: 70px;
 	border-radius: 0 0 0 30px;
 	color: white;
-	background-color: ${colors.primary};
 	border: none;
 	position: absolute;
 	font-size: 30px;
@@ -103,7 +102,7 @@ const Title = styled.h2`
 	color: white;
 	font-size: 40px;
 	height: 70px;
-	background-color: ${colors.primary};
+	background-color: ${colors.tertiary};
 	border-radius: 0 0 30px 0;
 	padding: 10px 50px 10px 50px;
 	left: 0;
