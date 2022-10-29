@@ -6,6 +6,8 @@ import OutilSignUp from './OutilSignUp'
 import { colors, screenSize } from '../../style/utils'
 function LoginPanel() {
 	const [isLoginDisplay, setLoginDisplay] = useState(true)
+
+	//Conteneur login qui permet le choix entre connexion et inscription
 	return (
 		<PanelConteneur>
 			<BigTitle>{!isLoginDisplay ? 'Inscription' : 'Connexion'}</BigTitle>

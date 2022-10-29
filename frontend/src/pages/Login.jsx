@@ -36,6 +36,4 @@ align-items: center;
 
 `
 
-
-
 export default Login

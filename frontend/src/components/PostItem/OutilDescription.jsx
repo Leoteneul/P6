@@ -9,7 +9,9 @@ function Outildescription({ description, postId }) {
 	const [isModifyDisplay, setModifyDisplay] = useState(false)
 	const [modifiedDescription, updateDescription] = useState('')
 	return (
+		
 		<div>
+			
 			{isModifyDisplay ? (
 				<DescriptionInput
 					type="text"

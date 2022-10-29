@@ -11,6 +11,7 @@ export const hookPutMail = async (emailChange, e) => {
 
 export const hookPutProfil = async (
 	nameChange,
+	homeData,
 	jobChange,
 	pictureChange,
 	formData,
@@ -28,11 +29,16 @@ export const hookPutProfil = async (
 		formData.append('file', pictureChange)
 	}
 
-	const response = await clientMultipart.put('/users/profil', formData)
-	clientMultipart.put('/post/modifyAll', formData)
+	console.log(pictureChange.name)
 
-	alert(response.message)
-	window.location.reload()
+	const response = await clientMultipart.put('/users/profil', formData)
+	const response2 = await client.put('/post/modifyAll', { name: nameChange })
+	if(response2){
+
+		alert(response.message)
+		window.location.reload()
+	}
+	
 }
 
 export const hookPostLogin = async (e, navigate, emailLogin, passwordLogin) => {

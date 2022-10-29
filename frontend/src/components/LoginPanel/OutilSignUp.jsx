@@ -9,6 +9,7 @@ function OutilSignUp() {
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
 	
+	// Outil qui gère le signup
 	return (
 		<SignUpWrapper>
 			<SignUpForm

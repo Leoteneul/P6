@@ -73,4 +73,7 @@ const UserImage = styled.img`
     height: 60px;
 	border-radius: 30px;
 	margin-right: 10px;
+
+	object-fit: cover;
+	object-position: top;
 `

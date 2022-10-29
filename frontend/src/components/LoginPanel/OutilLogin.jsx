@@ -8,7 +8,8 @@ function OutilLogin() {
 	const [emailLogin, setEmailLogin] = useState('')
 	const [passwordLogin, setPasswordLogin] = useState('')
 	const navigate = useNavigate()
-
+	
+	// Outil qui gère le login
 	return (
 		<LoginWrapper>
 			<LoginForm

@@ -14,24 +14,17 @@ function PostItem({ homeData, isUser }) {
 		hookGetAllPost(setAllPost, isUser, homeData)
 	}, [isUser, homeData])
 
+	// Conteneur qui englobe tous les posts
 	return (
+		// on map nos items sur les post récupérés de la BDD
 		<div>
-			<GlobalStyle />
+			<GlobalStyle /> 
+
 			{allPost.map(
 				(
-					{
-						name,
-						_id,
-						description,
-						imageUrl,
-						imagePostUrl,
-						userId,
-						usersLiked,
-						likes,
-					},
-					index
-				) => (
-					<Test key={`${name}-${index}`}>
+					{name, _id, description, imageUrl, imagePostUrl, userId, usersLiked, likes}, index) => 
+					(
+					<Post key={`${name}-${index}`}>
 						{/* Info sur le propriétaire du post */}
 						<InfoUserWrapper>
 							<UserImg src={imageUrl} alt="imagepost" />
@@ -57,14 +50,14 @@ function PostItem({ homeData, isUser }) {
 							likes={likes}
 							postId={_id}
 						/>
-					</Test>
+					</Post>
 				)
 			)}
 		</div>
 	)
 }
 
-const Test = styled.div`
+const Post = styled.div`
 	display: flex;
 	position: relative;
 	flex-direction: column;
@@ -112,6 +105,8 @@ const UserImg = styled.img`
 	border-radius: 30px;
 	margin-right: 20px;
 	border: 2px solid ${colors.tertiary};
+	object-fit: cover;
+	object-position: top;
 `
 
 const UserName = styled.h3`

@@ -36,15 +36,26 @@ exports.getAllPost = (req, res, next) => {
 
 exports.modifyAllPost = (req, res, next) => {
 
-    const profil = req.file ? {
-        ...req.body,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } : {...req.body};
 
-     
-    Post.updateMany({userId: req.auth.userId}, { ...profil })
-            .then(() => res.status(200).json({ message: 'post modifié!'}))
-            .catch(error => res.status(401).json({ error }));
+    User.findOne({_id: req.auth.userId})
+    .then(user => {
+
+        const profil = {
+            ...req.body,
+            imageUrl: user.imageUrl
+          }
+
+          Post.updateMany({userId: req.auth.userId}, { ...profil })
+   
+          .then(() => res.status(200).json({ message: 'post modifié!'}))
+          .catch(error => res.status(401).json({ error }));
+
+    })
+    .catch(error => res.status(500).json({ error }))
+
+    
+    
+    
 
 }
 

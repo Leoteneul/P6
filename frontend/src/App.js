@@ -1,21 +1,25 @@
-import GlobalStyle from "./style/GlobalStyle"
-import Home from "./pages/Home/Home"
+
+import Home from "./pages/Home"
 import Login from "./pages/Login"
 import User from "./pages/User"
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   
   
   
   return (
-    <div>
-      <GlobalStyle />
-      <Login />
-      <Home />
-      <User/>
-     
-    </div>
+    <BrowserRouter>
+      
+      <Routes>
+        
+        <Route path="/"  element={<Login />} />
+        <Route path="/home"  element={<Home />}/>
+        <Route path="/user/*"  element={<User />}/>
+
+        
+      </Routes>
+    </BrowserRouter>
   )
 }
 

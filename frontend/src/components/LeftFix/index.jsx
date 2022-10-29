@@ -11,7 +11,8 @@ function LeftFix({
 	isLeftFixActive,
 	updateIsLeftFix,
 }) {
-	return (
+	// Left Fix conteneur fixed
+	return (  
 		<LeftFixConteneur isLeftFixActive={isLeftFixActive}>
 			{isLeftFixActive ? (
 				<div>

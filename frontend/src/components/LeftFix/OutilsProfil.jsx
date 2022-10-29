@@ -11,12 +11,12 @@ function OutilsProfil({ homeData, isUser }) {
 	const [isProfilFocus, setProfilFocus] = useState(false)
 	let formData = new FormData()
 
-	return (
+	return ( // Outil qui gère le profil et ses modifications
 		<ProfilContainer isUser={isUser}
 			method="put"
 			enctype="multipart/form-data"
 			onSubmit={(e) => {
-				hookPutProfil(nameChange, jobChange, pictureChange, formData, e)
+				hookPutProfil(nameChange, homeData, jobChange, pictureChange, formData, e)
 			}}
 			onMouseOver={() => setProfilFocus(true)}
 			onMouseOut={() => setProfilFocus(false)}
@@ -118,10 +118,17 @@ const PictureInput = styled.input`
 	z-index: 40;
 	cursor: pointer;
 	opacity: 0;
+	
 `
 const Picture = styled.img`
-	max-height: 200px;
-	max-width: 200px;
+	
+	border-radius: 30px;
+	height: 100%;
+	width: 100%;
+	
+	object-fit: cover;
+	object-position: top;
+
 `
 
 const Job = styled.input`
