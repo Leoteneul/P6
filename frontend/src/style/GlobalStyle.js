@@ -93,5 +93,4 @@ button{
   }
   `
 
-
 export default GlobalStyle

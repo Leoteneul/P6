@@ -21,7 +21,7 @@ function OutilLogin() {
 			>
 				<LoginTitle>Email:</LoginTitle>
 				<LoginInput
-					type="text"
+					type="email"
 					onInput={(e) => setEmailLogin(e.target.value)}
 				/>
 				<LoginTitle>Mot de Passe:</LoginTitle>

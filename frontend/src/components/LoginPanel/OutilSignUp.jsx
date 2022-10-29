@@ -19,7 +19,7 @@ function OutilSignUp() {
 				}}
 			>
 				<SignUpTitle>Email:</SignUpTitle>
-				<SignUpInput type="text" onInput={(e) => setEmail(e.target.value)} />
+				<SignUpInput type="email" onInput={(e) => setEmail(e.target.value)} />
 				<SignUpTitle>Mot de Passe:</SignUpTitle>
 				<SignUpInput type="password" onInput={(e) => setPassword(e.target.value)} />
 				<SignUpButton type="submit">S'inscrire</SignUpButton>
