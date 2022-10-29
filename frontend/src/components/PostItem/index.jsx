@@ -17,7 +17,7 @@ function PostItem({ homeData, isUser }) {
 	// Conteneur qui englobe tous les posts
 	return (
 		// on map nos items sur les post récupérés de la BDD
-		<div>
+		<PostConteneur>
 			<GlobalStyle /> 
 
 			{allPost.map(
@@ -53,10 +53,17 @@ function PostItem({ homeData, isUser }) {
 					</Post>
 				)
 			)}
-		</div>
+		</PostConteneur>
 	)
 }
 
+
+const PostConteneur = styled.div`
+
+display: flex;
+flex-direction: column-reverse;
+
+`
 const Post = styled.div`
 	display: flex;
 	position: relative;
